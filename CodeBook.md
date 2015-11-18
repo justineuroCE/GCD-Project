@@ -259,7 +259,7 @@ With special thanks to [R](http://www.R-project.org/) (R Core Team, 2015), [RStu
 #### **References**
 
 * Allaire, J.J., Horner, J., Marti, V. and N. Porte. (2015).  markdown: 'Markdown' Rendering for R (v. 0.7.7).  URL: https://github.com/rstudio/markdown
-* Allaire, J.J., Cheng, J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
+* Allaire, J.J., Cheng, J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and R.J. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
 * Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015).  data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: https://github.com/Rdatatable/data.table/wiki
 * Gruber, John. (2004). Markdown (v. 1.0.1).  URL: http://daringfireball.net/projects/markdown/
 * MacFarlane, John. (2014). Pandoc: a universal documenter (v. 1.12.3). URL: http://pandoc.org/
