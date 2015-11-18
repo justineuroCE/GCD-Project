@@ -85,15 +85,15 @@ acts|Type of activity|ordinal|1|“WALKING”
  \ |||4|“SITTING”
  \ |||5|“STANDING”
  \ |||6|“LAYING”
-bodyAccX1 – bodyAccX128|Triaxial acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccY1 – bodyAccY128|Triaxial acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccZ1 – bodyAccZ128|Triaxial acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyGyroX1 – bodyGyroX128|Triaxial angular velocity – x component; 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroY1 – bodyGyroY128|Triaxial angular velocity – y component; 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroZ1 – bodyGyroZ128|Triaxial angular velocity – z component; 128 measurements in radians/second|continuous|real| [-1,1]
-totAccX1 – totAccX128|Total acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccY1 – totAccY128|Total acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccZ1 – bodyAccZ128|Total acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+bodyAccX1 to bodyAccX128|Triaxial acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+bodyAccY1 to bodyAccY128|Triaxial acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+bodyAccZ1 to bodyAccZ128|Triaxial acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+bodyGyroX1 to bodyGyroX128|Triaxial angular velocity – x component; 128 measurements in radians/second|continuous|real| [-1,1]
+bodyGyroY1 to bodyGyroY128|Triaxial angular velocity – y component; 128 measurements in radians/second|continuous|real| [-1,1]
+bodyGyroZ1 to bodyGyroZ128|Triaxial angular velocity – z component; 128 measurements in radians/second|continuous|real| [-1,1]
+totAccX1 to totAccX128|Total acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+totAccY1 to totAccY128|Total acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+totAccZ1 to bodyAccZ128|Total acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
  \ |||| \ |
 
 To create the merged raw dataset:
@@ -111,7 +111,7 @@ To create the merged raw dataset:
     + uses the function *actConv* to create an *activity* column containing the descriptive labels WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, or LAYING in lieu of the actCd values of 1 to 6, respectively
     + returns a list containing four elements; the first element is a data frame called *dataPart* and contains the raw data for either *train* or *test* dataset depending on which was specified  
 * Step 3 --- I constructed the *train* and *test* dataset using *constructData("train")* and  *constructData("test")*; see lines 102-104.  
-* Step 4 --- Finally, Imerged the *train* and *test* raw data into the data frame *dataAll* (see lines 120-123) that contained all the variables listed in Table 1.
+* Step 4 --- Finally, I merged the *train* and *test* raw data into the data frame *dataAll* (see lines 120-123) that contained all the variables listed in Table 1.
 
      
     
@@ -145,7 +145,7 @@ totAccYSd|SD total acceleration – y component based on 128 measurements in sta
 totAccZSd|SD total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
  \ |  |  |  | \ |  
 
-To create a dataset for the means and standard deviations of the nine variables (**Goal 2**), I continued off from Step 4 for creating the raw dataset.  The additional steps are in the second part of the **constructData** function (lines 82-88, 94).
+To create a dataset for the means and standard deviations of the nine variables (**Goal 2**), I continued off from Step 4 for creating the raw dataset but include the second part of Step 2.  The additional steps are in the second part of the **constructData** function (lines 82-88, 94).
 
 * Step 2 (continued) --- The second part of the **constructData** function:  
     + creates a list containing the nine 10299 x 128 data frames for the variables in the study (line 84)
@@ -167,15 +167,15 @@ Variable|Description|Type|Values|Add'l Info
 ID|Subject ID|integer|1 to 30|21 train IDs, 9 test IDs
 testOrTrain|Indicates train or test data|categorical|TRAIN|train data
 \  |                        |   |TEST|test data
-bodyAccXMnActs1 – bodyAccXMnActs6|Mean triaxial acceleration – x component; six activities;  in standard gravity units 'g'|continuous|real|1 “WALKING”, 2 “WALKING\_UPSTAIRS”, 3 “WALKING\_DOWNSTAIRS”, 4 “SITTING”, 5 “STANDING”, 6 “LAYING”
-bodyAccYMnActs1 -  bodyAccYMnActs6|Mean triaxial acceleration – y component; six activities; in standard gravity units 'g'|continuous|real| "
-BodyAccZMnActs1 – bodyAccZMnActs6|Mean triaxial acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
-bodyGyroXMnActs1 - bodyGyroXMnActs6|Mean triaxial angular velocity – x component; six activities; in radians/second|continuous|real|  "
-bodyGyroYMnActs1 – bodyGyroYMnActs6|Mean triaxial angular velocity – y component; six activities; in radians/second|continuous|real|  "
-bodyGyroZMnActs1 - bodyGyroZMnActs6|Mean triaxial angular velocity – z component; six activities| in radians/secondcontinuous|real|  "
-totAccXMnActs1 – totAccXMnActs6|Mean total acceleration – x component; six activities; in standard gravity units 'g'|continuous|real|  "
-totAccYMnActs1 – totAccYMnActs6|Mean total acceleration – y component; six activities; in standard gravity units 'g'|continuous|real|  "
-totAccZMnActs1 – totAccZMnActs6|Mean total acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
+bodyAccXMnActs1 to bodyAccXMnActs6|Mean triaxial acceleration – x component; six activities;  in standard gravity units 'g'|continuous|real|1 “WALKING”, 2 “WALKING\_UPSTAIRS”, 3 “WALKING\_DOWNSTAIRS”, 4 “SITTING”, 5 “STANDING”, 6 “LAYING”
+bodyAccYMnActs1 to  bodyAccYMnActs6|Mean triaxial acceleration – y component; six activities; in standard gravity units 'g'|continuous|real| "
+BodyAccZMnActs1 to bodyAccZMnActs6|Mean triaxial acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
+bodyGyroXMnActs1 to bodyGyroXMnActs6|Mean triaxial angular velocity – x component; six activities; in radians/second|continuous|real|  "
+bodyGyroYMnActs1 to bodyGyroYMnActs6|Mean triaxial angular velocity – y component; six activities; in radians/second|continuous|real|  "
+bodyGyroZMnActs1 to bodyGyroZMnActs6|Mean triaxial angular velocity – z component; six activities| in radians/secondcontinuous|real|  "
+totAccXMnActs1 to totAccXMnActs6|Mean total acceleration – x component; six activities; in standard gravity units 'g'|continuous|real|  "
+totAccYMnActs1 to totAccYMnActs6|Mean total acceleration – y component; six activities; in standard gravity units 'g'|continuous|real|  "
+totAccZMnActs1 to totAccZMnActs6|Mean total acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
 \ |||| \ |
 
 For Goal 5, to get the overall means (means of means) of the nine variables in the study: 
@@ -224,20 +224,46 @@ A similar set of R commands gave the following frequency table for the *test* da
     302 317 288 294 320 327 364 354 381 
     Total test subjects:  2947 
 
-These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observation contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.
+These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.
+
+Lastly, the following **sessionInfo** details may come in handy for those who want to replicate the results obtained here.
+```
+> sessionInfo()
+R version 3.2.1 (2015-06-18)
+Platform: i686-pc-linux-gnu (32-bit)
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] dplyr_0.4.3      data.table_1.9.6
+
+loaded via a namespace (and not attached):
+ [1] lazyeval_0.1.10 magrittr_1.5    R6_2.1.1        assertthat_0.1  parallel_3.2.1  DBI_0.3.1      
+ [7] htmltools_0.2.6 tools_3.2.1     yaml_2.1.13     Rcpp_0.12.1     rmarkdown_0.8.1 digest_0.6.8   
+[13] chron_2.3-47   
+```
 
 
 #### **Acknowledgments**
 
-With special thanks to [R](http://www.R-project.org/) (R Core Team,2015), [RStudio](https://www.rstudio.com/products/rstudio/) (R Studio Team, 2012), [dplyr](URL: https://github.com/hadley/dplyr) (Wickham  and Francois, 2015), [data.table](https://github.com/Rdatatable/data.table/wiki) (Dowle et al., 2015), [markdown](URL: https://github.com/rstudio/markdown) (Allaire et al., 2015), [rmarkdown](http://rmarkdown.rstudio.com) (Allaire et al, 2015) and [knitr](http://yihui.name/knitr/) (Xie et al., 2015).
+With special thanks to [R](http://www.R-project.org/) (R Core Team,2015), [RStudio](https://www.rstudio.com/products/rstudio/) (R Studio Team, 2012), [dplyr](URL: https://github.com/hadley/dplyr) (Wickham  and Francois, 2015), [data.table](https://github.com/Rdatatable/data.table/wiki) (Dowle et al., 2015), [markdown (in R)](URL: https://github.com/rstudio/markdown) (Allaire et al., 2015), [rmarkdown](http://rmarkdown.rstudio.com) (Allaire et al, 2015), [knitr](http://yihui.name/knitr/) (Xie et al., 2015), [pandoc](http://johnmacfarlane.net/pandoc) (MacFarlane, 2014), and [Markdown](http://daringfireball.net/projects/markdown/) (Gruber, 2004).
 
 #### **References**
 
 * Allaire, J.J., Horner, J., Marti, V. and N. Porte. (2015).  markdown: 'Markdown' Rendering for R (v. 0.7.7).  URL: https://github.com/rstudio/markdown
 * Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
 * Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015).  data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: https://github.com/Rdatatable/data.table/wiki
+* Gruber, John. (2004). Markdown (v. 1.0.1).  URL: http://daringfireball.net/projects/markdown/
+* MacFarlane, John. (2014). Randoc: a universal documenter (v. 1.12.3). URL: http://pandoc.org/
 * R Core Team. (2015).  R: A Language and Environment for Statisitical Computing. URL: http://www.R-project.org/
 * R Studio Team 2012. (2012).  RStudio version 0.98.953.  URL: https://www.rstudio.com/products/rstudio/ 
 * Wickham, H. and R. Francois. (2015). dplyr: A Grammar of Data Manipulation (v. 0.4.3).  URL: https://github.com/hadley/dplyr
-* Xie, Y., Vogt, A., Andrew, A., Zvoleff, A., Simon, A., Atkins, A., and 59 others. (2015).  knitr: A General-Purpose Package for Dynamic Report Generation in R (v. 1.11).  URL: http://yihui.name/knitr/  
+* Xie, Y., Vogt, A., Andrew, A., Zvoleff, A., Simon, A., Atkins, A., Manton, A., and 59 others. (2015).  knitr: A General-Purpose Package for Dynamic Report Generation in R (v. 1.11).  URL: http://yihui.name/knitr/  
 

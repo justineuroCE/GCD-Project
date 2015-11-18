@@ -100,7 +100,7 @@ list(dataPart,dataMeans,dataSds,idNumTab)
 ###
 
 # construct the train and test data
-dataTrain<-constructData("train") # these contains a list with four elements
+dataTrain<-constructData("train") # this contains a list with four elements
 dataTest<-constructData("test")   #        "
 
 # print frequency distribution of number of trials (observations) per subject for each 

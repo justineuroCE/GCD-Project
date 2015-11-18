@@ -181,63 +181,63 @@ img {
 <td align="left">“LAYING”</td>
 </tr>
 <tr class="even">
-<td align="left">bodyAccX1 – bodyAccX128</td>
+<td align="left">bodyAccX1 to bodyAccX128</td>
 <td align="left">Triaxial acceleration – x component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyAccY1 – bodyAccY128</td>
+<td align="left">bodyAccY1 to bodyAccY128</td>
 <td align="left">Triaxial acceleration – y component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="even">
-<td align="left">bodyAccZ1 – bodyAccZ128</td>
+<td align="left">bodyAccZ1 to bodyAccZ128</td>
 <td align="left">Triaxial acceleration – z component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyGyroX1 – bodyGyroX128</td>
+<td align="left">bodyGyroX1 to bodyGyroX128</td>
 <td align="left">Triaxial angular velocity – x component; 128 measurements in radians/second</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="even">
-<td align="left">bodyGyroY1 – bodyGyroY128</td>
+<td align="left">bodyGyroY1 to bodyGyroY128</td>
 <td align="left">Triaxial angular velocity – y component; 128 measurements in radians/second</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyGyroZ1 – bodyGyroZ128</td>
+<td align="left">bodyGyroZ1 to bodyGyroZ128</td>
 <td align="left">Triaxial angular velocity – z component; 128 measurements in radians/second</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="even">
-<td align="left">totAccX1 – totAccX128</td>
+<td align="left">totAccX1 to totAccX128</td>
 <td align="left">Total acceleration – x component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="odd">
-<td align="left">totAccY1 – totAccY128</td>
+<td align="left">totAccY1 to totAccY128</td>
 <td align="left">Total acceleration – y component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">[-1,1]</td>
 </tr>
 <tr class="even">
-<td align="left">totAccZ1 – bodyAccZ128</td>
+<td align="left">totAccZ1 to bodyAccZ128</td>
 <td align="left">Total acceleration – z component; 128 measurements in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
@@ -271,7 +271,7 @@ img {
 <li>returns a list containing four elements; the first element is a data frame called <em>dataPart</em> and contains the raw data for either <em>train</em> or <em>test</em> dataset depending on which was specified<br /></li>
 </ul></li>
 <li>Step 3 — I constructed the <em>train</em> and <em>test</em> dataset using <em>constructData(“train”)</em> and <em>constructData(“test”)</em>; see lines 102-104.<br /></li>
-<li>Step 4 — Finally, Imerged the <em>train</em> and <em>test</em> raw data into the data frame <em>dataAll</em> (see lines 120-123) that contained all the variables listed in Table 1.</li>
+<li>Step 4 — Finally, I merged the <em>train</em> and <em>test</em> raw data into the data frame <em>dataAll</em> (see lines 120-123) that contained all the variables listed in Table 1.</li>
 </ul>
 </div>
 </div>
@@ -427,7 +427,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p>To create a dataset for the means and standard deviations of the nine variables (<strong>Goal 2</strong>), I continued off from Step 4 for creating the raw dataset. The additional steps are in the second part of the <strong>constructData</strong> function (lines 82-88, 94).</p>
+<p>To create a dataset for the means and standard deviations of the nine variables (<strong>Goal 2</strong>), I continued off from Step 4 for creating the raw dataset but include the second part of Step 2. The additional steps are in the second part of the <strong>constructData</strong> function (lines 82-88, 94).</p>
 <ul>
 <li>Step 2 (continued) — The second part of the <strong>constructData</strong> function:
 <ul>
@@ -480,63 +480,63 @@ img {
 <td align="left">test data</td>
 </tr>
 <tr class="even">
-<td align="left">bodyAccXMnActs1 – bodyAccXMnActs6</td>
+<td align="left">bodyAccXMnActs1 to bodyAccXMnActs6</td>
 <td align="left">Mean triaxial acceleration – x component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">1 “WALKING”, 2 “WALKING_UPSTAIRS”, 3 “WALKING_DOWNSTAIRS”, 4 “SITTING”, 5 “STANDING”, 6 “LAYING”</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyAccYMnActs1 - bodyAccYMnActs6</td>
+<td align="left">bodyAccYMnActs1 to bodyAccYMnActs6</td>
 <td align="left">Mean triaxial acceleration – y component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="even">
-<td align="left">BodyAccZMnActs1 – bodyAccZMnActs6</td>
+<td align="left">BodyAccZMnActs1 to bodyAccZMnActs6</td>
 <td align="left">Mean triaxial acceleration – z component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyGyroXMnActs1 - bodyGyroXMnActs6</td>
+<td align="left">bodyGyroXMnActs1 to bodyGyroXMnActs6</td>
 <td align="left">Mean triaxial angular velocity – x component; six activities; in radians/second</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="even">
-<td align="left">bodyGyroYMnActs1 – bodyGyroYMnActs6</td>
+<td align="left">bodyGyroYMnActs1 to bodyGyroYMnActs6</td>
 <td align="left">Mean triaxial angular velocity – y component; six activities; in radians/second</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="odd">
-<td align="left">bodyGyroZMnActs1 - bodyGyroZMnActs6</td>
+<td align="left">bodyGyroZMnActs1 to bodyGyroZMnActs6</td>
 <td align="left">Mean triaxial angular velocity – z component; six activities</td>
 <td align="left">in radians/secondcontinuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="even">
-<td align="left">totAccXMnActs1 – totAccXMnActs6</td>
+<td align="left">totAccXMnActs1 to totAccXMnActs6</td>
 <td align="left">Mean total acceleration – x component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="odd">
-<td align="left">totAccYMnActs1 – totAccYMnActs6</td>
+<td align="left">totAccYMnActs1 to totAccYMnActs6</td>
 <td align="left">Mean total acceleration – y component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
 <td align="left">&quot;</td>
 </tr>
 <tr class="even">
-<td align="left">totAccZMnActs1 – totAccZMnActs6</td>
+<td align="left">totAccZMnActs1 to totAccZMnActs6</td>
 <td align="left">Mean total acceleration – z component; six activities; in standard gravity units ‘g’</td>
 <td align="left">continuous</td>
 <td align="left">real</td>
@@ -662,12 +662,33 @@ idNum
   2   4   9  10  12  13  18  20  24 
 302 317 288 294 320 327 364 354 381 
 Total test subjects:  2947 </code></pre>
-<p>These together with the dataset in <strong>tableFreqSubjectByActivity.txt</strong> give information as to how many observation contribute information to each overall mean calculated in Goal 5. For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING, 47 for 2-WALKING_UPSTAIRS, 53 for 3-WALKING_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.</p>
+<p>These together with the dataset in <strong>tableFreqSubjectByActivity.txt</strong> give information as to how many observations contribute information to each overall mean calculated in Goal 5. For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING, 47 for 2-WALKING_UPSTAIRS, 53 for 3-WALKING_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.</p>
+<p>Lastly, the following <strong>sessionInfo</strong> details may come in handy for those who want to replicate the results obtained here.</p>
+<pre><code>&gt; sessionInfo()
+R version 3.2.1 (2015-06-18)
+Platform: i686-pc-linux-gnu (32-bit)
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] dplyr_0.4.3      data.table_1.9.6
+
+loaded via a namespace (and not attached):
+ [1] lazyeval_0.1.10 magrittr_1.5    R6_2.1.1        assertthat_0.1  parallel_3.2.1  DBI_0.3.1      
+ [7] htmltools_0.2.6 tools_3.2.1     yaml_2.1.13     Rcpp_0.12.1     rmarkdown_0.8.1 digest_0.6.8   
+[13] chron_2.3-47   </code></pre>
 </div>
 </div>
 <div id="acknowledgments" class="section level4">
 <h4><strong>Acknowledgments</strong></h4>
-<p>With special thanks to <a href="http://www.R-project.org/">R</a> (R Core Team,2015), <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> (R Studio Team, 2012), <a href="URL:%20https://github.com/hadley/dplyr">dplyr</a> (Wickham and Francois, 2015), <a href="https://github.com/Rdatatable/data.table/wiki">data.table</a> (Dowle et al., 2015), <a href="URL:%20https://github.com/rstudio/markdown">markdown</a> (Allaire et al., 2015), <a href="http://rmarkdown.rstudio.com">rmarkdown</a> (Allaire et al, 2015) and <a href="http://yihui.name/knitr/">knitr</a> (Xie et al., 2015).</p>
+<p>With special thanks to <a href="http://www.R-project.org/">R</a> (R Core Team,2015), <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> (R Studio Team, 2012), <a href="URL:%20https://github.com/hadley/dplyr">dplyr</a> (Wickham and Francois, 2015), <a href="https://github.com/Rdatatable/data.table/wiki">data.table</a> (Dowle et al., 2015), <a href="URL:%20https://github.com/rstudio/markdown">markdown (in R)</a> (Allaire et al., 2015), <a href="http://rmarkdown.rstudio.com">rmarkdown</a> (Allaire et al, 2015), <a href="http://yihui.name/knitr/">knitr</a> (Xie et al., 2015), <a href="http://johnmacfarlane.net/pandoc">pandoc</a> (MacFarlane, 2014), and <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (Gruber, 2004).</p>
 </div>
 <div id="references" class="section level4">
 <h4><strong>References</strong></h4>
@@ -675,10 +696,12 @@ Total test subjects:  2947 </code></pre>
 <li>Allaire, J.J., Horner, J., Marti, V. and N. Porte. (2015). markdown: ‘Markdown’ Rendering for R (v. 0.7.7). URL: <a href="https://github.com/rstudio/markdown">https://github.com/rstudio/markdown</a></li>
 <li>Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1). URL: <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a></li>
 <li>Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015). data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: <a href="https://github.com/Rdatatable/data.table/wiki">https://github.com/Rdatatable/data.table/wiki</a></li>
+<li>Gruber, John. (2004). Markdown (v. 1.0.1). URL: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a></li>
+<li>MacFarlane, John. (2014). Randoc: a universal documenter (v. 1.12.3). URL: <a href="http://pandoc.org/">http://pandoc.org/</a></li>
 <li>R Core Team. (2015). R: A Language and Environment for Statisitical Computing. URL: <a href="http://www.R-project.org/">http://www.R-project.org/</a></li>
 <li>R Studio Team 2012. (2012). RStudio version 0.98.953. URL: <a href="https://www.rstudio.com/products/rstudio/">https://www.rstudio.com/products/rstudio/</a></li>
 <li>Wickham, H. and R. Francois. (2015). dplyr: A Grammar of Data Manipulation (v. 0.4.3). URL: <a href="https://github.com/hadley/dplyr">https://github.com/hadley/dplyr</a></li>
-<li>Xie, Y., Vogt, A., Andrew, A., Zvoleff, A., Simon, A., Atkins, A., and 59 others. (2015). knitr: A General-Purpose Package for Dynamic Report Generation in R (v. 1.11). URL: <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></li>
+<li>Xie, Y., Vogt, A., Andrew, A., Zvoleff, A., Simon, A., Atkins, A., Manton, A., and 59 others. (2015). knitr: A General-Purpose Package for Dynamic Report Generation in R (v. 1.11). URL: <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a></li>
 </ul>
 </div>
 </div>

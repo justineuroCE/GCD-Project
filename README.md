@@ -5,7 +5,7 @@ The files in this repository are for the analyses of data from the [Human Activi
 The files in this directory are:  
 
 * README.md --- this file
-* README.html --- a *knitr*-processed version of README.md
+* README.html --- a *rmarkdown + markdown*-processed version of README.md in HTML format
 * LICENSE --- license file for the contents of this folder
 * .gitignore
 * r_analysis.R  --- an R script used for the analyses that does the following:
@@ -14,9 +14,13 @@ The files in this directory are:
     + Goal 3. Uses descriptive activity names to name the activities in the data set
     + Goal 4. Appropriately labels the data set with descriptive variable names. 
     + Goal 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-* r_analysis.html --- an RStudio Notebook output of a run of r_analysis.R in HTML format
+* r_analysis.html --- an RStudio Notebook compile output of a run of r_analysis.R in HTML format
 * CodeBook.md --- a codebook for the datasets produced by r_analysis.R
-* CodeBook.html --- a *knitr*-processed version of CodeBook.md in HTML format 
-* MarkdownHereGitHub.css --- a stylesheet for CodeBook.html by [Vasily Polovnyov](vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard) 
+* CodeBook.html --- a *rmarkdown + markdown*-processed version of CodeBook.md in HTML format 
+* MarkdownHereGitHub.css --- a stylesheet for CodeBook.html by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard) 
 * diagnostics.txt --- a sink file; contains frequency tables for the number of observations by subject 
 * tableFreqSubjectByActivity.txt --- frequency table for the number of observations by subject and activity
+
+#### Acknowledgments
+
+With special thanks to [R](http://www.R-project.org/) (R Core Team,2015), [RStudio](https://www.rstudio.com/products/rstudio/) (R Studio Team, 2012), [dplyr](URL: https://github.com/hadley/dplyr) (Wickham  and Francois, 2015), [data.table](https://github.com/Rdatatable/data.table/wiki) (Dowle et al., 2015), [markdown (in R)](URL: https://github.com/rstudio/markdown) (Allaire et al., 2015), [rmarkdown](http://rmarkdown.rstudio.com) (Allaire et al, 2015), [knitr](http://yihui.name/knitr/) (Xie et al., 2015), [pandoc](http://johnmacfarlane.net/pandoc) (MacFarlane, 2014), and [Markdown](http://daringfireball.net/projects/markdown/) (Gruber, 2004).
