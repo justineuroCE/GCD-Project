@@ -270,7 +270,7 @@ img {
 <li>uses the function <em>actConv</em> to create an <em>activity</em> column containing the descriptive labels WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, or LAYING in lieu of the actCd values of 1 to 6, respectively</li>
 <li>returns a list containing four elements; the first element is a data frame called <em>dataPart</em> and contains the raw data for either <em>train</em> or <em>test</em> dataset depending on which was specified<br /></li>
 </ul></li>
-<li>Step 3 — I constructed the <em>train</em> and <em>test</em> dataset using <em>constructData(“train”)</em> and <em>constructData(“test”)</em>; see lines 102-104.<br /></li>
+<li>Step 3 — I constructed the <em>train</em> and <em>test</em> datasets using <em>constructData(“train”)</em> and <em>constructData(“test”)</em>; see lines 102-104.<br /></li>
 <li>Step 4 — Finally, I merged the <em>train</em> and <em>test</em> raw data into the data frame <em>dataAll</em> (see lines 120-123) that contained all the variables listed in Table 1.</li>
 </ul>
 </div>
@@ -596,42 +596,42 @@ img {
 <td align="left">test data</td>
 </tr>
 <tr class="even">
-<td align="left">WALKING</td>
+<td align="left">1-WALKING</td>
 <td align="left">number of observations by subject obtained for activity: WALKING</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left"> </td>
 </tr>
 <tr class="odd">
-<td align="left">WALKING_UPSTAIRS</td>
+<td align="left">2-WALKING_UPSTAIRS</td>
 <td align="left">number of observations by subject obtained for activity: WALKING_UPSTAIRS</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left"> </td>
 </tr>
 <tr class="even">
-<td align="left">WALKING_DOWNSTAIRS</td>
+<td align="left">3-WALKING_DOWNSTAIRS</td>
 <td align="left">number of observations by subject obtained for activity: WALKING_DOWNSTAIRS</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left"> </td>
 </tr>
 <tr class="odd">
-<td align="left">SITTING</td>
+<td align="left">4-SITTING</td>
 <td align="left">number of observations by subject obtained for activity: SITTING</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left"> </td>
 </tr>
 <tr class="even">
-<td align="left">STANDING</td>
+<td align="left">5-STANDING</td>
 <td align="left">number of observations by subject obtained for activity: STANDING</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left"> </td>
 </tr>
 <tr class="odd">
-<td align="left">LAYING</td>
+<td align="left">6-LAYING</td>
 <td align="left">number of observations by subject obtained for activity: LAYING</td>
 <td align="left">integer</td>
 <td align="left"></td>
@@ -646,7 +646,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p>Using the R commands like the ones below (see lines 98-113), I got the number of observations obtained per subject in the study for both the <em>train</em> and <em>test</em> datasets (these were printed out in the file diagnostics.txt).</p>
+<p>Using the R commands like the ones below (see lines 98-113), I got the number of observations obtained per subject in the study for both the <em>train</em> and <em>test</em> datasets (these were printed out in the file <em>diagnostics.txt</em>).</p>
 <pre><code>dataTrain&lt;-constructData(&quot;train&quot;) # these contains a list with four elements
 cat(&quot;\n Number of trials (observations) per subject (including all 6 activities): train data \n&quot;)
 print(dataTrain[[4]])
@@ -662,7 +662,7 @@ idNum
   2   4   9  10  12  13  18  20  24 
 302 317 288 294 320 327 364 354 381 
 Total test observations:  2947 </code></pre>
-<p>These together with the dataset in <strong>tableFreqSubjectByActivity.txt</strong> give information as to how many observations contribute information to each overall mean calculated in Goal 5. For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING, 47 for 2-WALKING_UPSTAIRS, 53 for 3-WALKING_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.</p>
+<p>These together with the dataset in <strong>tableFreqSubjectByActivity.txt</strong> give information as to how many observations contribute information to each overall mean calculated in Goal 5. For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING, 47 for 2-WALKING_UPSTAIRS, 53 for 3-WALKING_DOWNSTAIRS, 95 for 4-SITTING, 49 for 5-STANDING, and 53 for 6-LAYING.</p>
 <p>Lastly, the following <strong>sessionInfo</strong> details may come in handy for those who want to replicate the results obtained here.</p>
 <pre><code>&gt; sessionInfo()
 R version 3.2.1 (2015-06-18)
@@ -694,7 +694,7 @@ loaded via a namespace (and not attached):
 <h4><strong>References</strong></h4>
 <ul>
 <li>Allaire, J.J., Horner, J., Marti, V. and N. Porte. (2015). markdown: ‘Markdown’ Rendering for R (v. 0.7.7). URL: <a href="https://github.com/rstudio/markdown">https://github.com/rstudio/markdown</a></li>
-<li>Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1). URL: <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a></li>
+<li>Allaire, J.J., Cheng, J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1). URL: <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a></li>
 <li>Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015). data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: <a href="https://github.com/Rdatatable/data.table/wiki">https://github.com/Rdatatable/data.table/wiki</a></li>
 <li>Gruber, John. (2004). Markdown (v. 1.0.1). URL: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a></li>
 <li>MacFarlane, John. (2014). Pandoc: a universal documenter (v. 1.12.3). URL: <a href="http://pandoc.org/">http://pandoc.org/</a></li>

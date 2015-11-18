@@ -110,7 +110,7 @@ To create the merged raw dataset:
     + binds together *idNum*, *testOrTrain*, *actCd*, *bodyAccX*, *bodyAccY*, *bodyAccZ*, *bodyGyroX*, *bodyGyroY*, *bodyGyroZ*, *totAccX*, *totAccY*, and *totAccZ* (lines 75-76); the variables after *actCd* are each of dimensions 10299 x 128
     + uses the function *actConv* to create an *activity* column containing the descriptive labels WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, or LAYING in lieu of the actCd values of 1 to 6, respectively
     + returns a list containing four elements; the first element is a data frame called *dataPart* and contains the raw data for either *train* or *test* dataset depending on which was specified  
-* Step 3 --- I constructed the *train* and *test* dataset using *constructData("train")* and  *constructData("test")*; see lines 102-104.  
+* Step 3 --- I constructed the *train* and *test* datasets using *constructData("train")* and  *constructData("test")*; see lines 102-104.  
 * Step 4 --- Finally, I merged the *train* and *test* raw data into the data frame *dataAll* (see lines 120-123) that contained all the variables listed in Table 1.
 
      
@@ -194,15 +194,15 @@ Variable|Description|Type|Values|Add'l Info
 ID|Subject ID|integer|1 to 30|21 train IDs, 9 test IDs
 testOrTrain|Indicates train or test data|categorical|TRAIN|train data
 \ |||TEST|test data
-WALKING|number of observations by subject obtained for activity: WALKING|integer|| \ |
-WALKING\_UPSTAIRS|number of observations by subject obtained for activity: WALKING\_UPSTAIRS|integer|| \ |
-WALKING\_DOWNSTAIRS|number of observations by subject obtained for activity: WALKING\_DOWNSTAIRS|integer|| \ |
-SITTING|number of observations by subject obtained for activity: SITTING|integer|| \ |
-STANDING|number of observations by subject obtained for activity: STANDING|integer|| \ |
-LAYING|number of observations by subject obtained for activity: LAYING|integer|| \ |
+1-WALKING|number of observations by subject obtained for activity: WALKING|integer|| \ |
+2-WALKING\_UPSTAIRS|number of observations by subject obtained for activity: WALKING\_UPSTAIRS|integer|| \ |
+3-WALKING\_DOWNSTAIRS|number of observations by subject obtained for activity: WALKING\_DOWNSTAIRS|integer|| \ |
+4-SITTING|number of observations by subject obtained for activity: SITTING|integer|| \ |
+5-STANDING|number of observations by subject obtained for activity: STANDING|integer|| \ |
+6-LAYING|number of observations by subject obtained for activity: LAYING|integer|| \ |
 \ |||| \ |
 
-Using the R commands like the ones below (see lines 98-113), I got the number of observations obtained per subject in the study for both the *train* and *test* datasets (these were printed out in the file diagnostics.txt).  
+Using the R commands like the ones below (see lines 98-113), I got the number of observations obtained per subject in the study for both the *train* and *test* datasets (these were printed out in the file *diagnostics.txt*).  
 ```
 dataTrain<-constructData("train") # these contains a list with four elements
 cat("\n Number of trials (observations) per subject (including all 6 activities): train data \n")
@@ -225,7 +225,7 @@ A similar set of R commands gave the following frequency table for the *test* da
     Total test observations:  2947 
 
 
-These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.
+These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 49 for 5-STANDING, and 53 for 6-LAYING.
 
 Lastly, the following **sessionInfo** details may come in handy for those who want to replicate the results obtained here.
 ```
@@ -259,7 +259,7 @@ With special thanks to [R](http://www.R-project.org/) (R Core Team, 2015), [RStu
 #### **References**
 
 * Allaire, J.J., Horner, J., Marti, V. and N. Porte. (2015).  markdown: 'Markdown' Rendering for R (v. 0.7.7).  URL: https://github.com/rstudio/markdown
-* Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
+* Allaire, J.J., Cheng, J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
 * Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015).  data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: https://github.com/Rdatatable/data.table/wiki
 * Gruber, John. (2004). Markdown (v. 1.0.1).  URL: http://daringfireball.net/projects/markdown/
 * MacFarlane, John. (2014). Pandoc: a universal documenter (v. 1.12.3). URL: http://pandoc.org/
