@@ -17,7 +17,7 @@ The files in this directory are:
 * r_analysis.html --- an RStudio Notebook compile output of a run of r_analysis.R in HTML format
 * CodeBook.md --- a codebook for the datasets produced by r_analysis.R
 * CodeBook.html --- a *rmarkdown + markdown*-processed version of CodeBook.md in HTML format 
-* MarkdownHereGitHub.css --- a stylesheet for CodeBook.html by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard) 
+* MarkdownHereGitHub.css --- a stylesheet used for CodeBook.html by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard) 
 * diagnostics.txt --- a sink file; contains frequency tables for the number of observations by subject 
 * tableFreqSubjectByActivity.txt --- frequency table for the number of observations by subject and activity
 
