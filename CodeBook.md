@@ -145,7 +145,7 @@ totAccYSd|SD total acceleration – y component based on 128 measurements in sta
 totAccZSd|SD total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
  \ |  |  |  | \ |  
 
-To create a dataset for the means and standard deviations of the nine variables (**Goal 2**), I continued off from Step 4 for creating the raw dataset but include the second part of Step 2.  The additional steps are in the second part of the **constructData** function (lines 82-88, 94).
+To create a dataset for the means and standard deviations of the nine variables (**Goal 2**), I continued off from Step 4 for creating the raw dataset but included the additional steps that are in the second part of the **constructData** function (lines 82-88, 94).
 
 * Step 2 (continued) --- The second part of the **constructData** function:  
     + creates a list containing the nine 10299 x 128 data frames for the variables in the study (line 84)
@@ -180,7 +180,7 @@ totAccZMnActs1 to totAccZMnActs6|Mean total acceleration – z component; six ac
 
 For Goal 5, to get the overall means (means of means) of the nine variables in the study: 
 
-* Step 7 --- I created the R function **createMeanVar** that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID.  The image of **createMeavar** is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column).  See lines 150-205.
+* Step 7 --- I created the R function **createMeanVar** that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID.  The image of **createMeaVar** is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column).  See lines 150-205.
 * Step 8 --- I then used **createMeanVar** to process the nine data frames of variable means to get nine 30 x 1 data frames of overall means.  The ID, testOrTrain, and these nine data frames were bounded column-wise to produce a data frame with dimensions 30 x 11.  See lines 212-226. 
 
 
@@ -218,11 +218,12 @@ cat("Total train observations: ", sum(dataTrain[[4]]),"\n")
 
 A similar set of R commands gave the following frequency table for the *test* dataset:
 
-     Number of trials per subject: test data
+     Number of trials (observations) per subject (including all 6 activities): test data
     idNum
       2   4   9  10  12  13  18  20  24 
     302 317 288 294 320 327 364 354 381 
-    Total test subjects:  2947 
+    Total test observations:  2947 
+
 
 These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 95 for 5-STANDING, and 49 for 6-LAYING.
 
