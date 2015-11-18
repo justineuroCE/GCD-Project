@@ -553,14 +553,14 @@ img {
 </table>
 <p>For Goal 5, to get the overall means (means of means) of the nine variables in the study:</p>
 <ul>
-<li>Step 7 — I created the R function <strong>createMeanVar</strong> that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID. The image of <strong>createMeaVar</strong> is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column). See lines 150-205.</li>
+<li>Step 7 — I created the R function <strong>createMeanVar</strong> that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID. The image of <strong>createMeanVar</strong> is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column). See lines 150-205.</li>
 <li>Step 8 — I then used <strong>createMeanVar</strong> to process the nine data frames of variable means to get nine 30 x 1 data frames of overall means. The ID, testOrTrain, and these nine data frames were bounded column-wise to produce a data frame with dimensions 30 x 11. See lines 212-226.</li>
 </ul>
 </div>
 </div>
 <div id="supplementary-information" class="section level4">
 <h4><strong>Supplementary Information</strong></h4>
-<p>As a supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity. These were written out into the file <strong>tableFreqSubjectByActivity.txt</strong>.</p>
+<p>As supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity. These were written out into the file <strong>tableFreqSubjectByActivity.txt</strong>.</p>
 <div id="table-4-supplementary-information-subject-by-activity-frequency-info-on-number-of-measurements-on-which-overall-variable-means-were-based" class="section level5">
 <h5><strong>Table 4: Supplementary Information — Subject by Activity Frequency (Info on number of measurements on which overall variable means were based)</strong></h5>
 <table>
@@ -697,7 +697,7 @@ loaded via a namespace (and not attached):
 <li>Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1). URL: <a href="http://rmarkdown.rstudio.com">http://rmarkdown.rstudio.com</a></li>
 <li>Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015). data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: <a href="https://github.com/Rdatatable/data.table/wiki">https://github.com/Rdatatable/data.table/wiki</a></li>
 <li>Gruber, John. (2004). Markdown (v. 1.0.1). URL: <a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a></li>
-<li>MacFarlane, John. (2014). Randoc: a universal documenter (v. 1.12.3). URL: <a href="http://pandoc.org/">http://pandoc.org/</a></li>
+<li>MacFarlane, John. (2014). Pandoc: a universal documenter (v. 1.12.3). URL: <a href="http://pandoc.org/">http://pandoc.org/</a></li>
 <li>R Core Team. (2015). R: A Language and Environment for Statisitical Computing. URL: <a href="http://www.R-project.org/">http://www.R-project.org/</a></li>
 <li>R Studio Team 2012. (2012). RStudio version 0.98.953. URL: <a href="https://www.rstudio.com/products/rstudio/">https://www.rstudio.com/products/rstudio/</a></li>
 <li>Wickham, H. and R. Francois. (2015). dplyr: A Grammar of Data Manipulation (v. 0.4.3). URL: <a href="https://github.com/hadley/dplyr">https://github.com/hadley/dplyr</a></li>

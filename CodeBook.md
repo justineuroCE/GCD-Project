@@ -180,13 +180,13 @@ totAccZMnActs1 to totAccZMnActs6|Mean total acceleration – z component; six ac
 
 For Goal 5, to get the overall means (means of means) of the nine variables in the study: 
 
-* Step 7 --- I created the R function **createMeanVar** that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID.  The image of **createMeaVar** is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column).  See lines 150-205.
+* Step 7 --- I created the R function **createMeanVar** that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID.  The image of **createMeanVar** is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column).  See lines 150-205.
 * Step 8 --- I then used **createMeanVar** to process the nine data frames of variable means to get nine 30 x 1 data frames of overall means.  The ID, testOrTrain, and these nine data frames were bounded column-wise to produce a data frame with dimensions 30 x 11.  See lines 212-226. 
 
 
 #### **Supplementary Information**
 
-As a supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity.  These were written out into the file **tableFreqSubjectByActivity.txt**.
+As supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity.  These were written out into the file **tableFreqSubjectByActivity.txt**.
 
 ##### **Table 4: Supplementary Information --- Subject by Activity Frequency (Info on number of measurements on which overall variable means were based)**
 Variable|Description|Type|Values|Add'l Info
@@ -262,7 +262,7 @@ With special thanks to [R](http://www.R-project.org/) (R Core Team,2015), [RStud
 * Allaire, J.J., Cheng,J., Xie, Y., McPherson, J., Chang, W., Allen, J., Wickham, H., Atkins, A., and H. Hyndman. (2015). Dynamic Documents for R (v. 0.8.1).  URL: http://rmarkdown.rstudio.com
 * Dowle,M., Srinivasan, A., Short, T., and S. Lianoglou.(2015).  data.table: Extension of Data.frame (v. 1.9.6) (with contributions from R. Saporta and E. Antonyan) URL: https://github.com/Rdatatable/data.table/wiki
 * Gruber, John. (2004). Markdown (v. 1.0.1).  URL: http://daringfireball.net/projects/markdown/
-* MacFarlane, John. (2014). Randoc: a universal documenter (v. 1.12.3). URL: http://pandoc.org/
+* MacFarlane, John. (2014). Pandoc: a universal documenter (v. 1.12.3). URL: http://pandoc.org/
 * R Core Team. (2015).  R: A Language and Environment for Statisitical Computing. URL: http://www.R-project.org/
 * R Studio Team 2012. (2012).  RStudio version 0.98.953.  URL: https://www.rstudio.com/products/rstudio/ 
 * Wickham, H. and R. Francois. (2015). dplyr: A Grammar of Data Manipulation (v. 0.4.3).  URL: https://github.com/hadley/dplyr
