@@ -136,7 +136,7 @@ dataTrainSds<-dataTrain[[3]]
 dataTestSds<-dataTest[[3]]
 dataSdsAll<-rbind(dataTrainSds,dataTestSds)
 
-# combine means and sds data the write-out using write.table() for uploading
+# combine means and sds data then write-out using write.table() for uploading
 dataMeansSdsAll<-cbind(dataMeansAll,dataSdsAll)
 write.table(dataMeansSdsAll,file="MeansAndSdsMeasurements.txt",row.names=FALSE,col.names=TRUE,quote=FALSE)
 
@@ -163,7 +163,7 @@ createMeanVar<- function(x) {
   # 7 ("totAccXMn"), 8 ("totAccYMn"), or 9 ("totAccZMn")
   
   # for each subject by activity combination, calculate the mean of all 
-  # the mean measurements for the varible given
+  # the mean measurements for the variable given
   
   # initialize data frame
     dataMeansByActs<-data.frame(matrix(1:30,30,1,dimnames=list(rep("",30),c("ID"))))
@@ -206,7 +206,7 @@ createMeanVar<- function(x) {
   
   # output the merged data (except ID) containing the six activties for this variable
   select(dataMeansByActs,-ID) 
-} # this produces a data.fram of dim 30 by 6 
+} # this produces a data.frame of dim 30 by 6 
 
 ##
 # create and merge the data for the nine variables
