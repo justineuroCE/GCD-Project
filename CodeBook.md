@@ -49,22 +49,22 @@ The project required us to write R codes for creating three (3) datasets: 1) raw
 
 The raw data included the variables for: 1) subject number (**ID**); 2) test/train data indicator variable (**testOrTrain**); 3) activity (**acts**); 4) 384 (3 x 128) variables for the three components (x,y, and z) of the triaxial acceleration (**bodyAccX1** to **bodyAccX128**, **bodyAccY1** to **bodyAccY128**, and **bodyAccZ1** to **bodyAccZ128**); 5) 384 variables for the three components (x,y, and z) of the triaxial angular velocity (**bodyGyroX1** to **bodyGyroX128**, **bodyGyroY1** to **bodyGyroY128**, and **bodyGyroZ1** to **bodyGyroZ128**); 6) 384 variables of the three components of the total acceleration (**totAccX1**  to **totAccX128**, **totAccY1** to **totAccY128**, and **totAccZ1** to **totAccZ128**).  This gave a total of **1155** raw dataset variables (3 non-experimentally-measured variables and 1152 experimentally-measured variables).  Strictly speaking, the raw data contained only 9 experimentally-measured variables (*bodyAccX*, *bodyAccY*, *bodyAccZ*, *bodyGyroX*, *bodyGyroY*, *bodyGyroZ*, *totAccX*, *totAccY*, and *totAccZ*) with 128 measurements for each variable (per variable, a window contained 128 measured values per observation  and 9 x 128 = 1152).  
 
-The **features** statistics (561 per subject per trial) in the file X\_train.txt\/X\_test.txt (from either the train or test sub-folder of the main data folder) were not included in the raw dataset.
+The **features** statistics (561 per subject per trial) in the file X\_train.txt/X\_test.txt (from either the train or test sub-folder of the main data folder) were not included in the raw dataset.
 
 The values of the variables (except testOrTrain) were either read from the following files of the main data folder: 
 
 * ID - train/subject\_train.txt or test/subject\_test.txt
 * (testOrTrain - created based on folder name and ID information)
 * acts - train/y\_train.txt or test/y\_test.txt
-* bodyAccX# - train\/Inertial Signals\/body_acc\_x\_train.txt or test\/Inertial Signals\/body_acc\_x\_test.txt
-* bodyAccY# - train\/Inertial Signals\/body_acc\_y\_train.txt or test\/Inertial Signals\/body_acc\_y\_test.txt
-* bodyAccZ# - train\/Inertial Signals\/body_acc\_z\_train.txt or test\/Inertial Signals\/body_acc\_z\_test.txt
-* bodyGyroX# - train\/Inertial Signals\/body_gyro\_x\_train.txt or test\/Inertial Signals\/body_gyro\_x\_test.txt
-* bodyGyroY# - train\/Inertial Signals\/body_gyro\_y\_train.txt or test\/Inertial Signals\/body_gyro\_y\_test.txt
-* bodyGyroZ# - train\/Inertial Signals\/body_gyro\_z\_train.txt or test\/Inertial Signals\/body_acc\_z\_test.txt
-* totAccX# - train\/Inertial Signals\/tot_acc\_x\_train.txt or test\/Inertial Signals\/tot_acc\_x\_test.txt
-* totAccY# - train\/Inertial Signals\/tot_acc\_y\_train.txt or test\/Inertial Signals\/tot_acc\_y\_test.txt
-* totAccZ# - train\/Inertial Signals\/tot_acc\_z\_train.txt or test\/Inertial Signals\/tot_acc\_z\_test.txt  
+* bodyAccX# - train/Inertial Signals/body_acc\_x\_train.txt or test/Inertial Signals/body_acc\_x\_test.txt
+* bodyAccY# - train/Inertial Signals/body_acc\_y\_train.txt or test/Inertial Signals/body_acc\_y\_test.txt
+* bodyAccZ# - train/Inertial Signals/body_acc\_z\_train.txt or test/Inertial Signals/body_acc\_z\_test.txt
+* bodyGyroX# - train/Inertial Signals/body_gyro\_x\_train.txt or test/Inertial Signals/body_gyro\_x\_test.txt
+* bodyGyroY# - train/Inertial Signals/body_gyro\_y\_train.txt or test/Inertial Signals/body_gyro\_y\_test.txt
+* bodyGyroZ# - train/Inertial Signals/body_gyro\_z\_train.txt or test/Inertial Signals/body_acc\_z\_test.txt
+* totAccX# - train/Inertial Signals/tot_acc\_x\_train.txt or test/Inertial Signals/tot_acc\_x\_test.txt
+* totAccY# - train/Inertial Signals/tot_acc\_y\_train.txt or test/Inertial Signals/tot_acc\_y\_test.txt
+* totAccZ# - train/Inertial Signals/tot_acc\_z\_train.txt or test/Inertial Signals/tot_acc\_z\_test.txt  
 (*for the latter nine (9) variables, the \#  is an integer from 1 to 128*)
 
 There were no missing values in the datasets for train and test.  The train dataset contained 7352 lines (all observations; no header) based on 21 subjects (ID: 1, 3, 5, 6, 7, 8, 11,14, 15, 16, 17, 19, 21, 22, 23, 25, 26, 27, 28, 29, and 30) while the test dataset contained 2947 lines (all observations; no header) based on 9 subjects (ID: 2, 4, 9, 10, 12, 13, 18, 20, 24).  See discussion after Table 4  below for the R codes used for obtaining these.
@@ -172,7 +172,7 @@ bodyAccYMnActs1 to  bodyAccYMnActs6|Mean triaxial acceleration – y component; 
 BodyAccZMnActs1 to bodyAccZMnActs6|Mean triaxial acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
 bodyGyroXMnActs1 to bodyGyroXMnActs6|Mean triaxial angular velocity – x component; six activities; in radians/second|continuous|real|  "
 bodyGyroYMnActs1 to bodyGyroYMnActs6|Mean triaxial angular velocity – y component; six activities; in radians/second|continuous|real|  "
-bodyGyroZMnActs1 to bodyGyroZMnActs6|Mean triaxial angular velocity – z component; six activities| in radians/secondcontinuous|real|  "
+bodyGyroZMnActs1 to bodyGyroZMnActs6|Mean triaxial angular velocity – z component; six activities; in radians/second|continuous|real|  "
 totAccXMnActs1 to totAccXMnActs6|Mean total acceleration – x component; six activities; in standard gravity units 'g'|continuous|real|  "
 totAccYMnActs1 to totAccYMnActs6|Mean total acceleration – y component; six activities; in standard gravity units 'g'|continuous|real|  "
 totAccZMnActs1 to totAccZMnActs6|Mean total acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
@@ -254,7 +254,7 @@ loaded via a namespace (and not attached):
 
 #### **Acknowledgments**
 
-With special thanks to [R](http://www.R-project.org/) (R Core Team,2015), [RStudio](https://www.rstudio.com/products/rstudio/) (R Studio Team, 2012), [dplyr](URL: https://github.com/hadley/dplyr) (Wickham  and Francois, 2015), [data.table](https://github.com/Rdatatable/data.table/wiki) (Dowle et al., 2015), [markdown (in R)](URL: https://github.com/rstudio/markdown) (Allaire et al., 2015), [rmarkdown](http://rmarkdown.rstudio.com) (Allaire et al, 2015), [knitr](http://yihui.name/knitr/) (Xie et al., 2015), [pandoc](http://johnmacfarlane.net/pandoc) (MacFarlane, 2014), and [Markdown](http://daringfireball.net/projects/markdown/) (Gruber, 2004).
+With special thanks to [R](http://www.R-project.org/) (R Core Team, 2015), [RStudio](https://www.rstudio.com/products/rstudio/) (R Studio Team, 2012), [dplyr](URL: https://github.com/hadley/dplyr) (Wickham  and Francois, 2015), [data.table](https://github.com/Rdatatable/data.table/wiki) (Dowle et al., 2015), [markdown (in R)](URL: https://github.com/rstudio/markdown) (Allaire et al., 2015), [rmarkdown](http://rmarkdown.rstudio.com) (Allaire et al, 2015), [knitr](http://yihui.name/knitr/) (Xie et al., 2015), [pandoc](http://johnmacfarlane.net/pandoc) (MacFarlane, 2014), and [Markdown](http://daringfireball.net/projects/markdown/) (Gruber, 2004).
 
 #### **References**
 
