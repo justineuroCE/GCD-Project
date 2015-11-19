@@ -39,7 +39,7 @@ colnames(activities)<-c("actCodes","acts")
 
 # function to transform ordinal activity codes (actCd; column name "acts") into
 # descriptive values (helps fulfill Goal 4.)
-actConv<-function(x){activities[x][[2]]}  
+actConv<-function(x){paste(x,"-",activities[x][[2]],sep="")}  
 
 
 ###
@@ -48,10 +48,10 @@ actConv<-function(x){activities[x][[2]]}
 constructData <- function(x) {# x is either "train" or "test"
   # load the id numbers
   idNum <- fread(paste("UCI_HAR_Dataset/",x,"/subject_",x,".txt",sep=""),col.names=c("ID"))
-
+  
   # obtain frequency distribution for number of trials by subject (diagnostic purposes)
   idNumTab<-table(idNum)  
-
+  
   # load the activity codes
   actCd <- fread(paste("UCI_HAR_Dataset/",x,"/y_",x,".txt",sep=""),col.names=c("acts"))
   
@@ -66,7 +66,7 @@ constructData <- function(x) {# x is either "train" or "test"
   totAccX<-fread(paste("UCI_HAR_Dataset/",x,"/Inertial Signals/total_acc_x_",x,".txt",sep=""),col.names=paste(rep("totAccX",128),1:128,sep=""))
   totAccY<-fread(paste("UCI_HAR_Dataset/",x,"/Inertial Signals/total_acc_y_",x,".txt",sep=""),col.names=paste(rep("totAccY",128),1:128,sep=""))
   totAccZ<-fread(paste("UCI_HAR_Dataset/",x,"/Inertial Signals/total_acc_z_",x,".txt",sep=""),col.names=paste(rep("totAccZ",128),1:128,sep=""))
-
+  
   # create the indicator variable on whether observation is for test or train (for Goal 4.)
   code<-"TRAIN"
   if (x == "test") code<-"TEST"
@@ -91,7 +91,7 @@ constructData <- function(x) {# x is either "train" or "test"
   # dataSds (contains only the measurement sds);
   # matrix (idNum,testOrTrain) (ID and code for test/train);
   # a frquency table for number of trials per subject (idNumTab) 
-list(dataPart,dataMeans,dataSds,idNumTab)
+  list(dataPart,dataMeans,dataSds,idNumTab)
 }
 
 
@@ -120,7 +120,15 @@ cat("Total test observations: ", sum(dataTest[[4]]),"\n")
 # raw data
 dataTrainAll<-dataTrain[[1]]# this is the train data
 dataTestAll<-dataTest[[1]]  # this it the test data
-dataAll<-rbind(dataTrainAll,dataTestAll)
+
+# merge the  train and test data; make data table
+dataAll<-tbl_df(rbind(dataTrainAll,dataTestAll))
+
+# print out the first few lines of dataAll
+cat("\n\n===============\n")
+cat(" A printout of the first 10 lines of dataMeansByActsAll:\n\n")
+print(dataAll)
+cat("\n=====End of partial printout: dataAll \n")
 
 #####
 #### Goal 2. Means and SDs.
@@ -147,72 +155,40 @@ write.table(dataMeansSdsAll,file="MeansAndSdsMeasurements.txt",row.names=FALSE,c
 ## on the particular subject and activity)
 ###
 
-##
-# create a function, createMeanvar, that will create data containing: 
-# subject (ID), train/test indicator (testOrTrain), activity and mean (based on 128 measurements) of one of the specified nine variables
-##
-
 # create full data containing ID, testOrTrain, acts, and the mean (based on 128 measurement per variable)
 # of each of the nine experimentally-measured variables (in dataMeansAll)
-dataAll2<-cbind(select(dataAll,ID,testOrTrain,acts),dataMeansAll)
+dataAll2<-cbind(select(dataAll,ID,testOrTrain,activity),dataMeansAll)
 
-createMeanVar<- function(x) {
-  # integer x is one of 
-  # 1 ("bodyAccXMn",) 2 ("bodyAccYMn"), 3 ("bodyAccZMn"),
-  # 4 ("bodyGyroXMn"), 5("bodyGyroYMn"), 6("bodyGyroZMn"),
-  # 7 ("totAccXMn"), 8 ("totAccYMn"), or 9 ("totAccZMn")
-  
-  # for each subject by activity combination, calculate the mean of all 
-  # the mean measurements for the variable given
-  
-  # initialize data frame
-    dataMeansByActs<-data.frame(matrix(1:30,30,1,dimnames=list(rep("",30),c("ID"))))
-  
-  # loop through the six activities
-  for (iActs in 1:6){ 
-    # calculate the mean of all the mean measurements for this activity by subject
-    if (x==1){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyAccXMn),by=(ID<-sort(ID))]
-    }
-    if(x==2){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyAccYMn),by=(ID<-sort(ID))]
-    }
-    if (x==3){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyAccZMn),by=(ID<-sort(ID))]
-    }
-    if (x==4){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyGyroXMn),by=(ID<-sort(ID))]
-    }
-    if (x==5){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyGyroYMn),by=(ID<-sort(ID))]
-    }
-    if (x==6){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(bodyGyroZMn),by=(ID<-sort(ID))]
-    }
-    if (x==7){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(totAccXMn),by=(ID<-sort(ID))]
-    }
-    if (x==8){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(totAccYMn),by=(ID<-sort(ID))]
-    }
-    if (x==9){
-      actsList<-filter(dataAll2,acts==iActs)[,mean(totAccZMn),by=(ID<-sort(ID))]
-    }
-    # create the column name
-    colnames(actsList)<-c("ID",paste(colnames(dataMeansAll)[[x]],"Acts",iActs,sep=""))
-    # merge this new column with existing data frame
-    dataMeansByActs<-merge(dataMeansByActs,actsList,by="ID")
-  }
-  
-  # output the merged data (except ID) containing the six activties for this variable
-  select(dataMeansByActs,-ID) 
-} # this produces a data.frame of dim 30 by 6 
+# use by_group to group by ID and by activity; summarize by getting means of nine varibles
+# this gives a data table of dimensions 30 x 12; 
+#rows: 30 IDs, columns: ID, testOrTrain, activity and the overall means of the nine variables 
+ggDataAll2<-group_by(dataAll2,ID,testOrTrain,activity)
+dataMeansByActsAll<-summarize(ggDataAll2,
+                              bodyAccXMnAct=mean(bodyAccXMn),
+                              bodyAccYMnAct=mean(bodyAccYMn),
+                              bodyAccZMnAct=mean(bodyAccZMn),
+                              bodyGyroXMnAct=mean(bodyGyroXMn),
+                              bodyGyroYMnAct=mean(bodyGyroYMn),
+                              bodyGyroZMnAct=mean(bodyGyroZMn),
+                              totAccXMnAct=mean(totAccXMn),
+                              totAccYMnAct=mean(totAccYMn),
+                              totAccZMnAct=mean(totAccZMn)
+)
 
+# get a view of the first few lines (right-truncated) of dataMeansByActsAll
+cat("\n\n===============\n")
+cat(" A printout of the first 10 lines of dataMeansByActsAll:\n\n")
+print(dataMeansByActsAll)
+cat("\n=====End of partial printout: dataMeansByactsAll \n\n")
+
+###
 ##
-# create and merge the data for the nine variables
-# idNum is 1:30
-# merge testOrTrain for test and train
+# create table containing information regarding the number of observations
+# (each with 128 measurements) by subject and activity;  each count is also the 
+# number of means that was averaged to get the overall mean variable measurement
+# by subject and activity
 ##
+###
 
 # obtain the train/test IDs and testOrTrains
 idTrain<-dimnames(table(select(dataTrainAll,ID,testOrTrain)))$ID
@@ -222,8 +198,6 @@ testOrTrain<-c(rep("TRAIN",length(idTrain)),rep("TEST",length(idTest)))
 # bind the ID and tesCd then sort by ID
 IDtestOrTrain<- cbind(ID,testOrTrain)[order(ID),]
 
-# bind ID, tesCd, and means of the 9 experimentally-measured variables by subject and activity
-dataMeansByActsAll<-cbind(IDtestOrTrain,createMeanVar(1),createMeanVar(2),createMeanVar(3),createMeanVar(4),createMeanVar(5),createMeanVar(6),createMeanVar(7),createMeanVar(8),createMeanVar(9))
 
 # create table containing information regarding the number of observations
 # (each with 128 measurements) by subject and activity;  each count is also the 

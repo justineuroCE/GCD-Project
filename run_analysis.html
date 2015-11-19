@@ -63,7 +63,7 @@ img {
 <div id="header">
 <h1 class="title">run_analysis.R</h1>
 <h4 class="author"><em>juro</em></h4>
-<h4 class="date"><em>Wed Nov 18 17:00:06 2015</em></h4>
+<h4 class="date"><em>Thu Nov 19 14:05:19 2015</em></h4>
 </div>
 
 
@@ -121,7 +121,7 @@ colnames(activities)&lt;-c(&quot;actCodes&quot;,&quot;acts&quot;)
 
 # function to transform ordinal activity codes (actCd; column name &quot;acts&quot;) into
 # descriptive values (helps fulfill Goal 4.)
-actConv&lt;-function(x){activities[x][[2]]}  
+actConv&lt;-function(x){paste(x,&quot;-&quot;,activities[x][[2]],sep=&quot;&quot;)}  
 
 
 ###
@@ -130,10 +130,10 @@ actConv&lt;-function(x){activities[x][[2]]}
 constructData &lt;- function(x) {# x is either &quot;train&quot; or &quot;test&quot;
   # load the id numbers
   idNum &lt;- fread(paste(&quot;UCI_HAR_Dataset/&quot;,x,&quot;/subject_&quot;,x,&quot;.txt&quot;,sep=&quot;&quot;),col.names=c(&quot;ID&quot;))
-
+  
   # obtain frequency distribution for number of trials by subject (diagnostic purposes)
   idNumTab&lt;-table(idNum)  
-
+  
   # load the activity codes
   actCd &lt;- fread(paste(&quot;UCI_HAR_Dataset/&quot;,x,&quot;/y_&quot;,x,&quot;.txt&quot;,sep=&quot;&quot;),col.names=c(&quot;acts&quot;))
   
@@ -148,7 +148,7 @@ constructData &lt;- function(x) {# x is either &quot;train&quot; or &quot;test&q
   totAccX&lt;-fread(paste(&quot;UCI_HAR_Dataset/&quot;,x,&quot;/Inertial Signals/total_acc_x_&quot;,x,&quot;.txt&quot;,sep=&quot;&quot;),col.names=paste(rep(&quot;totAccX&quot;,128),1:128,sep=&quot;&quot;))
   totAccY&lt;-fread(paste(&quot;UCI_HAR_Dataset/&quot;,x,&quot;/Inertial Signals/total_acc_y_&quot;,x,&quot;.txt&quot;,sep=&quot;&quot;),col.names=paste(rep(&quot;totAccY&quot;,128),1:128,sep=&quot;&quot;))
   totAccZ&lt;-fread(paste(&quot;UCI_HAR_Dataset/&quot;,x,&quot;/Inertial Signals/total_acc_z_&quot;,x,&quot;.txt&quot;,sep=&quot;&quot;),col.names=paste(rep(&quot;totAccZ&quot;,128),1:128,sep=&quot;&quot;))
-
+  
   # create the indicator variable on whether observation is for test or train (for Goal 4.)
   code&lt;-&quot;TRAIN&quot;
   if (x == &quot;test&quot;) code&lt;-&quot;TEST&quot;
@@ -173,7 +173,7 @@ constructData &lt;- function(x) {# x is either &quot;train&quot; or &quot;test&q
   # dataSds (contains only the measurement sds);
   # matrix (idNum,testOrTrain) (ID and code for test/train);
   # a frquency table for number of trials per subject (idNumTab) 
-list(dataPart,dataMeans,dataSds,idNumTab)
+  list(dataPart,dataMeans,dataSds,idNumTab)
 }
 
 
@@ -214,9 +214,341 @@ cat(&quot;\n Number of trials (observations) per subject (including all 6 activi
 # raw data
 dataTrainAll&lt;-dataTrain[[1]]# this is the train data
 dataTestAll&lt;-dataTest[[1]]  # this it the test data
-dataAll&lt;-rbind(dataTrainAll,dataTestAll)
 
-#####
+# merge the  train and test data; make data table
+dataAll&lt;-tbl_df(rbind(dataTrainAll,dataTestAll))
+
+# print out the first few lines of dataAll
+cat(&quot;\n\n===============\n&quot;)</code></pre>
+<pre><code>## 
+## 
+## ===============</code></pre>
+<pre class="r"><code>cat(&quot; A printout of the first 10 lines of dataMeansByActsAll:\n\n&quot;)</code></pre>
+<pre><code>##  A printout of the first 10 lines of dataMeansByActsAll:</code></pre>
+<pre class="r"><code>print(dataAll)</code></pre>
+<pre><code>## Source: local data frame [10,299 x 1,156]
+## 
+##       ID testOrTrain  acts     bodyAccX1     bodyAccX2     bodyAccX3
+##    (int)       (chr) (int)         (dbl)         (dbl)         (dbl)
+## 1      1       TRAIN     5  1.808515e-04  0.0101385600  0.0092755740
+## 2      1       TRAIN     5  1.093752e-03  0.0045500770  0.0028791730
+## 3      1       TRAIN     5  3.531266e-03  0.0022850630 -0.0004197538
+## 4      1       TRAIN     5 -1.772352e-03 -0.0013114480  0.0003876795
+## 5      1       TRAIN     5  8.747685e-05 -0.0002719175  0.0010221030
+## 6      1       TRAIN     5  5.251613e-04 -0.0018632820 -0.0015102310
+## 7      1       TRAIN     5 -3.654856e-03 -0.0040257420 -0.0012593590
+## 8      1       TRAIN     5  3.775996e-03  0.0042627720  0.0048963610
+## 9      1       TRAIN     5  6.200004e-03  0.0026326370  0.0013077080
+## 10     1       TRAIN     5 -1.649368e-03 -0.0016844210 -0.0010734670
+## ..   ...         ...   ...           ...           ...           ...
+## Variables not shown: bodyAccX4 (dbl), bodyAccX5 (dbl), bodyAccX6 (dbl),
+##   bodyAccX7 (dbl), bodyAccX8 (dbl), bodyAccX9 (dbl), bodyAccX10 (dbl),
+##   bodyAccX11 (dbl), bodyAccX12 (dbl), bodyAccX13 (dbl), bodyAccX14 (dbl),
+##   bodyAccX15 (dbl), bodyAccX16 (dbl), bodyAccX17 (dbl), bodyAccX18 (dbl),
+##   bodyAccX19 (dbl), bodyAccX20 (dbl), bodyAccX21 (dbl), bodyAccX22 (dbl),
+##   bodyAccX23 (dbl), bodyAccX24 (dbl), bodyAccX25 (dbl), bodyAccX26 (dbl),
+##   bodyAccX27 (dbl), bodyAccX28 (dbl), bodyAccX29 (dbl), bodyAccX30 (dbl),
+##   bodyAccX31 (dbl), bodyAccX32 (dbl), bodyAccX33 (dbl), bodyAccX34 (dbl),
+##   bodyAccX35 (dbl), bodyAccX36 (dbl), bodyAccX37 (dbl), bodyAccX38 (dbl),
+##   bodyAccX39 (dbl), bodyAccX40 (dbl), bodyAccX41 (dbl), bodyAccX42 (dbl),
+##   bodyAccX43 (dbl), bodyAccX44 (dbl), bodyAccX45 (dbl), bodyAccX46 (dbl),
+##   bodyAccX47 (dbl), bodyAccX48 (dbl), bodyAccX49 (dbl), bodyAccX50 (dbl),
+##   bodyAccX51 (dbl), bodyAccX52 (dbl), bodyAccX53 (dbl), bodyAccX54 (dbl),
+##   bodyAccX55 (dbl), bodyAccX56 (dbl), bodyAccX57 (dbl), bodyAccX58 (dbl),
+##   bodyAccX59 (dbl), bodyAccX60 (dbl), bodyAccX61 (dbl), bodyAccX62 (dbl),
+##   bodyAccX63 (dbl), bodyAccX64 (dbl), bodyAccX65 (dbl), bodyAccX66 (dbl),
+##   bodyAccX67 (dbl), bodyAccX68 (dbl), bodyAccX69 (dbl), bodyAccX70 (dbl),
+##   bodyAccX71 (dbl), bodyAccX72 (dbl), bodyAccX73 (dbl), bodyAccX74 (dbl),
+##   bodyAccX75 (dbl), bodyAccX76 (dbl), bodyAccX77 (dbl), bodyAccX78 (dbl),
+##   bodyAccX79 (dbl), bodyAccX80 (dbl), bodyAccX81 (dbl), bodyAccX82 (dbl),
+##   bodyAccX83 (dbl), bodyAccX84 (dbl), bodyAccX85 (dbl), bodyAccX86 (dbl),
+##   bodyAccX87 (dbl), bodyAccX88 (dbl), bodyAccX89 (dbl), bodyAccX90 (dbl),
+##   bodyAccX91 (dbl), bodyAccX92 (dbl), bodyAccX93 (dbl), bodyAccX94 (dbl),
+##   bodyAccX95 (dbl), bodyAccX96 (dbl), bodyAccX97 (dbl), bodyAccX98 (dbl),
+##   bodyAccX99 (dbl), bodyAccX100 (dbl), bodyAccX101 (dbl), bodyAccX102
+##   (dbl), bodyAccX103 (dbl), bodyAccX104 (dbl), bodyAccX105 (dbl),
+##   bodyAccX106 (dbl), bodyAccX107 (dbl), bodyAccX108 (dbl), bodyAccX109
+##   (dbl), bodyAccX110 (dbl), bodyAccX111 (dbl), bodyAccX112 (dbl),
+##   bodyAccX113 (dbl), bodyAccX114 (dbl), bodyAccX115 (dbl), bodyAccX116
+##   (dbl), bodyAccX117 (dbl), bodyAccX118 (dbl), bodyAccX119 (dbl),
+##   bodyAccX120 (dbl), bodyAccX121 (dbl), bodyAccX122 (dbl), bodyAccX123
+##   (dbl), bodyAccX124 (dbl), bodyAccX125 (dbl), bodyAccX126 (dbl),
+##   bodyAccX127 (dbl), bodyAccX128 (dbl), bodyAccY1 (dbl), bodyAccY2 (dbl),
+##   bodyAccY3 (dbl), bodyAccY4 (dbl), bodyAccY5 (dbl), bodyAccY6 (dbl),
+##   bodyAccY7 (dbl), bodyAccY8 (dbl), bodyAccY9 (dbl), bodyAccY10 (dbl),
+##   bodyAccY11 (dbl), bodyAccY12 (dbl), bodyAccY13 (dbl), bodyAccY14 (dbl),
+##   bodyAccY15 (dbl), bodyAccY16 (dbl), bodyAccY17 (dbl), bodyAccY18 (dbl),
+##   bodyAccY19 (dbl), bodyAccY20 (dbl), bodyAccY21 (dbl), bodyAccY22 (dbl),
+##   bodyAccY23 (dbl), bodyAccY24 (dbl), bodyAccY25 (dbl), bodyAccY26 (dbl),
+##   bodyAccY27 (dbl), bodyAccY28 (dbl), bodyAccY29 (dbl), bodyAccY30 (dbl),
+##   bodyAccY31 (dbl), bodyAccY32 (dbl), bodyAccY33 (dbl), bodyAccY34 (dbl),
+##   bodyAccY35 (dbl), bodyAccY36 (dbl), bodyAccY37 (dbl), bodyAccY38 (dbl),
+##   bodyAccY39 (dbl), bodyAccY40 (dbl), bodyAccY41 (dbl), bodyAccY42 (dbl),
+##   bodyAccY43 (dbl), bodyAccY44 (dbl), bodyAccY45 (dbl), bodyAccY46 (dbl),
+##   bodyAccY47 (dbl), bodyAccY48 (dbl), bodyAccY49 (dbl), bodyAccY50 (dbl),
+##   bodyAccY51 (dbl), bodyAccY52 (dbl), bodyAccY53 (dbl), bodyAccY54 (dbl),
+##   bodyAccY55 (dbl), bodyAccY56 (dbl), bodyAccY57 (dbl), bodyAccY58 (dbl),
+##   bodyAccY59 (dbl), bodyAccY60 (dbl), bodyAccY61 (dbl), bodyAccY62 (dbl),
+##   bodyAccY63 (dbl), bodyAccY64 (dbl), bodyAccY65 (dbl), bodyAccY66 (dbl),
+##   bodyAccY67 (dbl), bodyAccY68 (dbl), bodyAccY69 (dbl), bodyAccY70 (dbl),
+##   bodyAccY71 (dbl), bodyAccY72 (dbl), bodyAccY73 (dbl), bodyAccY74 (dbl),
+##   bodyAccY75 (dbl), bodyAccY76 (dbl), bodyAccY77 (dbl), bodyAccY78 (dbl),
+##   bodyAccY79 (dbl), bodyAccY80 (dbl), bodyAccY81 (dbl), bodyAccY82 (dbl),
+##   bodyAccY83 (dbl), bodyAccY84 (dbl), bodyAccY85 (dbl), bodyAccY86 (dbl),
+##   bodyAccY87 (dbl), bodyAccY88 (dbl), bodyAccY89 (dbl), bodyAccY90 (dbl),
+##   bodyAccY91 (dbl), bodyAccY92 (dbl), bodyAccY93 (dbl), bodyAccY94 (dbl),
+##   bodyAccY95 (dbl), bodyAccY96 (dbl), bodyAccY97 (dbl), bodyAccY98 (dbl),
+##   bodyAccY99 (dbl), bodyAccY100 (dbl), bodyAccY101 (dbl), bodyAccY102
+##   (dbl), bodyAccY103 (dbl), bodyAccY104 (dbl), bodyAccY105 (dbl),
+##   bodyAccY106 (dbl), bodyAccY107 (dbl), bodyAccY108 (dbl), bodyAccY109
+##   (dbl), bodyAccY110 (dbl), bodyAccY111 (dbl), bodyAccY112 (dbl),
+##   bodyAccY113 (dbl), bodyAccY114 (dbl), bodyAccY115 (dbl), bodyAccY116
+##   (dbl), bodyAccY117 (dbl), bodyAccY118 (dbl), bodyAccY119 (dbl),
+##   bodyAccY120 (dbl), bodyAccY121 (dbl), bodyAccY122 (dbl), bodyAccY123
+##   (dbl), bodyAccY124 (dbl), bodyAccY125 (dbl), bodyAccY126 (dbl),
+##   bodyAccY127 (dbl), bodyAccY128 (dbl), bodyAccZ1 (dbl), bodyAccZ2 (dbl),
+##   bodyAccZ3 (dbl), bodyAccZ4 (dbl), bodyAccZ5 (dbl), bodyAccZ6 (dbl),
+##   bodyAccZ7 (dbl), bodyAccZ8 (dbl), bodyAccZ9 (dbl), bodyAccZ10 (dbl),
+##   bodyAccZ11 (dbl), bodyAccZ12 (dbl), bodyAccZ13 (dbl), bodyAccZ14 (dbl),
+##   bodyAccZ15 (dbl), bodyAccZ16 (dbl), bodyAccZ17 (dbl), bodyAccZ18 (dbl),
+##   bodyAccZ19 (dbl), bodyAccZ20 (dbl), bodyAccZ21 (dbl), bodyAccZ22 (dbl),
+##   bodyAccZ23 (dbl), bodyAccZ24 (dbl), bodyAccZ25 (dbl), bodyAccZ26 (dbl),
+##   bodyAccZ27 (dbl), bodyAccZ28 (dbl), bodyAccZ29 (dbl), bodyAccZ30 (dbl),
+##   bodyAccZ31 (dbl), bodyAccZ32 (dbl), bodyAccZ33 (dbl), bodyAccZ34 (dbl),
+##   bodyAccZ35 (dbl), bodyAccZ36 (dbl), bodyAccZ37 (dbl), bodyAccZ38 (dbl),
+##   bodyAccZ39 (dbl), bodyAccZ40 (dbl), bodyAccZ41 (dbl), bodyAccZ42 (dbl),
+##   bodyAccZ43 (dbl), bodyAccZ44 (dbl), bodyAccZ45 (dbl), bodyAccZ46 (dbl),
+##   bodyAccZ47 (dbl), bodyAccZ48 (dbl), bodyAccZ49 (dbl), bodyAccZ50 (dbl),
+##   bodyAccZ51 (dbl), bodyAccZ52 (dbl), bodyAccZ53 (dbl), bodyAccZ54 (dbl),
+##   bodyAccZ55 (dbl), bodyAccZ56 (dbl), bodyAccZ57 (dbl), bodyAccZ58 (dbl),
+##   bodyAccZ59 (dbl), bodyAccZ60 (dbl), bodyAccZ61 (dbl), bodyAccZ62 (dbl),
+##   bodyAccZ63 (dbl), bodyAccZ64 (dbl), bodyAccZ65 (dbl), bodyAccZ66 (dbl),
+##   bodyAccZ67 (dbl), bodyAccZ68 (dbl), bodyAccZ69 (dbl), bodyAccZ70 (dbl),
+##   bodyAccZ71 (dbl), bodyAccZ72 (dbl), bodyAccZ73 (dbl), bodyAccZ74 (dbl),
+##   bodyAccZ75 (dbl), bodyAccZ76 (dbl), bodyAccZ77 (dbl), bodyAccZ78 (dbl),
+##   bodyAccZ79 (dbl), bodyAccZ80 (dbl), bodyAccZ81 (dbl), bodyAccZ82 (dbl),
+##   bodyAccZ83 (dbl), bodyAccZ84 (dbl), bodyAccZ85 (dbl), bodyAccZ86 (dbl),
+##   bodyAccZ87 (dbl), bodyAccZ88 (dbl), bodyAccZ89 (dbl), bodyAccZ90 (dbl),
+##   bodyAccZ91 (dbl), bodyAccZ92 (dbl), bodyAccZ93 (dbl), bodyAccZ94 (dbl),
+##   bodyAccZ95 (dbl), bodyAccZ96 (dbl), bodyAccZ97 (dbl), bodyAccZ98 (dbl),
+##   bodyAccZ99 (dbl), bodyAccZ100 (dbl), bodyAccZ101 (dbl), bodyAccZ102
+##   (dbl), bodyAccZ103 (dbl), bodyAccZ104 (dbl), bodyAccZ105 (dbl),
+##   bodyAccZ106 (dbl), bodyAccZ107 (dbl), bodyAccZ108 (dbl), bodyAccZ109
+##   (dbl), bodyAccZ110 (dbl), bodyAccZ111 (dbl), bodyAccZ112 (dbl),
+##   bodyAccZ113 (dbl), bodyAccZ114 (dbl), bodyAccZ115 (dbl), bodyAccZ116
+##   (dbl), bodyAccZ117 (dbl), bodyAccZ118 (dbl), bodyAccZ119 (dbl),
+##   bodyAccZ120 (dbl), bodyAccZ121 (dbl), bodyAccZ122 (dbl), bodyAccZ123
+##   (dbl), bodyAccZ124 (dbl), bodyAccZ125 (dbl), bodyAccZ126 (dbl),
+##   bodyAccZ127 (dbl), bodyAccZ128 (dbl), bodyGyroX1 (dbl), bodyGyroX2
+##   (dbl), bodyGyroX3 (dbl), bodyGyroX4 (dbl), bodyGyroX5 (dbl), bodyGyroX6
+##   (dbl), bodyGyroX7 (dbl), bodyGyroX8 (dbl), bodyGyroX9 (dbl), bodyGyroX10
+##   (dbl), bodyGyroX11 (dbl), bodyGyroX12 (dbl), bodyGyroX13 (dbl),
+##   bodyGyroX14 (dbl), bodyGyroX15 (dbl), bodyGyroX16 (dbl), bodyGyroX17
+##   (dbl), bodyGyroX18 (dbl), bodyGyroX19 (dbl), bodyGyroX20 (dbl),
+##   bodyGyroX21 (dbl), bodyGyroX22 (dbl), bodyGyroX23 (dbl), bodyGyroX24
+##   (dbl), bodyGyroX25 (dbl), bodyGyroX26 (dbl), bodyGyroX27 (dbl),
+##   bodyGyroX28 (dbl), bodyGyroX29 (dbl), bodyGyroX30 (dbl), bodyGyroX31
+##   (dbl), bodyGyroX32 (dbl), bodyGyroX33 (dbl), bodyGyroX34 (dbl),
+##   bodyGyroX35 (dbl), bodyGyroX36 (dbl), bodyGyroX37 (dbl), bodyGyroX38
+##   (dbl), bodyGyroX39 (dbl), bodyGyroX40 (dbl), bodyGyroX41 (dbl),
+##   bodyGyroX42 (dbl), bodyGyroX43 (dbl), bodyGyroX44 (dbl), bodyGyroX45
+##   (dbl), bodyGyroX46 (dbl), bodyGyroX47 (dbl), bodyGyroX48 (dbl),
+##   bodyGyroX49 (dbl), bodyGyroX50 (dbl), bodyGyroX51 (dbl), bodyGyroX52
+##   (dbl), bodyGyroX53 (dbl), bodyGyroX54 (dbl), bodyGyroX55 (dbl),
+##   bodyGyroX56 (dbl), bodyGyroX57 (dbl), bodyGyroX58 (dbl), bodyGyroX59
+##   (dbl), bodyGyroX60 (dbl), bodyGyroX61 (dbl), bodyGyroX62 (dbl),
+##   bodyGyroX63 (dbl), bodyGyroX64 (dbl), bodyGyroX65 (dbl), bodyGyroX66
+##   (dbl), bodyGyroX67 (dbl), bodyGyroX68 (dbl), bodyGyroX69 (dbl),
+##   bodyGyroX70 (dbl), bodyGyroX71 (dbl), bodyGyroX72 (dbl), bodyGyroX73
+##   (dbl), bodyGyroX74 (dbl), bodyGyroX75 (dbl), bodyGyroX76 (dbl),
+##   bodyGyroX77 (dbl), bodyGyroX78 (dbl), bodyGyroX79 (dbl), bodyGyroX80
+##   (dbl), bodyGyroX81 (dbl), bodyGyroX82 (dbl), bodyGyroX83 (dbl),
+##   bodyGyroX84 (dbl), bodyGyroX85 (dbl), bodyGyroX86 (dbl), bodyGyroX87
+##   (dbl), bodyGyroX88 (dbl), bodyGyroX89 (dbl), bodyGyroX90 (dbl),
+##   bodyGyroX91 (dbl), bodyGyroX92 (dbl), bodyGyroX93 (dbl), bodyGyroX94
+##   (dbl), bodyGyroX95 (dbl), bodyGyroX96 (dbl), bodyGyroX97 (dbl),
+##   bodyGyroX98 (dbl), bodyGyroX99 (dbl), bodyGyroX100 (dbl), bodyGyroX101
+##   (dbl), bodyGyroX102 (dbl), bodyGyroX103 (dbl), bodyGyroX104 (dbl),
+##   bodyGyroX105 (dbl), bodyGyroX106 (dbl), bodyGyroX107 (dbl), bodyGyroX108
+##   (dbl), bodyGyroX109 (dbl), bodyGyroX110 (dbl), bodyGyroX111 (dbl),
+##   bodyGyroX112 (dbl), bodyGyroX113 (dbl), bodyGyroX114 (dbl), bodyGyroX115
+##   (dbl), bodyGyroX116 (dbl), bodyGyroX117 (dbl), bodyGyroX118 (dbl),
+##   bodyGyroX119 (dbl), bodyGyroX120 (dbl), bodyGyroX121 (dbl), bodyGyroX122
+##   (dbl), bodyGyroX123 (dbl), bodyGyroX124 (dbl), bodyGyroX125 (dbl),
+##   bodyGyroX126 (dbl), bodyGyroX127 (dbl), bodyGyroX128 (dbl), bodyGyroY1
+##   (dbl), bodyGyroY2 (dbl), bodyGyroY3 (dbl), bodyGyroY4 (dbl), bodyGyroY5
+##   (dbl), bodyGyroY6 (dbl), bodyGyroY7 (dbl), bodyGyroY8 (dbl), bodyGyroY9
+##   (dbl), bodyGyroY10 (dbl), bodyGyroY11 (dbl), bodyGyroY12 (dbl),
+##   bodyGyroY13 (dbl), bodyGyroY14 (dbl), bodyGyroY15 (dbl), bodyGyroY16
+##   (dbl), bodyGyroY17 (dbl), bodyGyroY18 (dbl), bodyGyroY19 (dbl),
+##   bodyGyroY20 (dbl), bodyGyroY21 (dbl), bodyGyroY22 (dbl), bodyGyroY23
+##   (dbl), bodyGyroY24 (dbl), bodyGyroY25 (dbl), bodyGyroY26 (dbl),
+##   bodyGyroY27 (dbl), bodyGyroY28 (dbl), bodyGyroY29 (dbl), bodyGyroY30
+##   (dbl), bodyGyroY31 (dbl), bodyGyroY32 (dbl), bodyGyroY33 (dbl),
+##   bodyGyroY34 (dbl), bodyGyroY35 (dbl), bodyGyroY36 (dbl), bodyGyroY37
+##   (dbl), bodyGyroY38 (dbl), bodyGyroY39 (dbl), bodyGyroY40 (dbl),
+##   bodyGyroY41 (dbl), bodyGyroY42 (dbl), bodyGyroY43 (dbl), bodyGyroY44
+##   (dbl), bodyGyroY45 (dbl), bodyGyroY46 (dbl), bodyGyroY47 (dbl),
+##   bodyGyroY48 (dbl), bodyGyroY49 (dbl), bodyGyroY50 (dbl), bodyGyroY51
+##   (dbl), bodyGyroY52 (dbl), bodyGyroY53 (dbl), bodyGyroY54 (dbl),
+##   bodyGyroY55 (dbl), bodyGyroY56 (dbl), bodyGyroY57 (dbl), bodyGyroY58
+##   (dbl), bodyGyroY59 (dbl), bodyGyroY60 (dbl), bodyGyroY61 (dbl),
+##   bodyGyroY62 (dbl), bodyGyroY63 (dbl), bodyGyroY64 (dbl), bodyGyroY65
+##   (dbl), bodyGyroY66 (dbl), bodyGyroY67 (dbl), bodyGyroY68 (dbl),
+##   bodyGyroY69 (dbl), bodyGyroY70 (dbl), bodyGyroY71 (dbl), bodyGyroY72
+##   (dbl), bodyGyroY73 (dbl), bodyGyroY74 (dbl), bodyGyroY75 (dbl),
+##   bodyGyroY76 (dbl), bodyGyroY77 (dbl), bodyGyroY78 (dbl), bodyGyroY79
+##   (dbl), bodyGyroY80 (dbl), bodyGyroY81 (dbl), bodyGyroY82 (dbl),
+##   bodyGyroY83 (dbl), bodyGyroY84 (dbl), bodyGyroY85 (dbl), bodyGyroY86
+##   (dbl), bodyGyroY87 (dbl), bodyGyroY88 (dbl), bodyGyroY89 (dbl),
+##   bodyGyroY90 (dbl), bodyGyroY91 (dbl), bodyGyroY92 (dbl), bodyGyroY93
+##   (dbl), bodyGyroY94 (dbl), bodyGyroY95 (dbl), bodyGyroY96 (dbl),
+##   bodyGyroY97 (dbl), bodyGyroY98 (dbl), bodyGyroY99 (dbl), bodyGyroY100
+##   (dbl), bodyGyroY101 (dbl), bodyGyroY102 (dbl), bodyGyroY103 (dbl),
+##   bodyGyroY104 (dbl), bodyGyroY105 (dbl), bodyGyroY106 (dbl), bodyGyroY107
+##   (dbl), bodyGyroY108 (dbl), bodyGyroY109 (dbl), bodyGyroY110 (dbl),
+##   bodyGyroY111 (dbl), bodyGyroY112 (dbl), bodyGyroY113 (dbl), bodyGyroY114
+##   (dbl), bodyGyroY115 (dbl), bodyGyroY116 (dbl), bodyGyroY117 (dbl),
+##   bodyGyroY118 (dbl), bodyGyroY119 (dbl), bodyGyroY120 (dbl), bodyGyroY121
+##   (dbl), bodyGyroY122 (dbl), bodyGyroY123 (dbl), bodyGyroY124 (dbl),
+##   bodyGyroY125 (dbl), bodyGyroY126 (dbl), bodyGyroY127 (dbl), bodyGyroY128
+##   (dbl), bodyGyroZ1 (dbl), bodyGyroZ2 (dbl), bodyGyroZ3 (dbl), bodyGyroZ4
+##   (dbl), bodyGyroZ5 (dbl), bodyGyroZ6 (dbl), bodyGyroZ7 (dbl), bodyGyroZ8
+##   (dbl), bodyGyroZ9 (dbl), bodyGyroZ10 (dbl), bodyGyroZ11 (dbl),
+##   bodyGyroZ12 (dbl), bodyGyroZ13 (dbl), bodyGyroZ14 (dbl), bodyGyroZ15
+##   (dbl), bodyGyroZ16 (dbl), bodyGyroZ17 (dbl), bodyGyroZ18 (dbl),
+##   bodyGyroZ19 (dbl), bodyGyroZ20 (dbl), bodyGyroZ21 (dbl), bodyGyroZ22
+##   (dbl), bodyGyroZ23 (dbl), bodyGyroZ24 (dbl), bodyGyroZ25 (dbl),
+##   bodyGyroZ26 (dbl), bodyGyroZ27 (dbl), bodyGyroZ28 (dbl), bodyGyroZ29
+##   (dbl), bodyGyroZ30 (dbl), bodyGyroZ31 (dbl), bodyGyroZ32 (dbl),
+##   bodyGyroZ33 (dbl), bodyGyroZ34 (dbl), bodyGyroZ35 (dbl), bodyGyroZ36
+##   (dbl), bodyGyroZ37 (dbl), bodyGyroZ38 (dbl), bodyGyroZ39 (dbl),
+##   bodyGyroZ40 (dbl), bodyGyroZ41 (dbl), bodyGyroZ42 (dbl), bodyGyroZ43
+##   (dbl), bodyGyroZ44 (dbl), bodyGyroZ45 (dbl), bodyGyroZ46 (dbl),
+##   bodyGyroZ47 (dbl), bodyGyroZ48 (dbl), bodyGyroZ49 (dbl), bodyGyroZ50
+##   (dbl), bodyGyroZ51 (dbl), bodyGyroZ52 (dbl), bodyGyroZ53 (dbl),
+##   bodyGyroZ54 (dbl), bodyGyroZ55 (dbl), bodyGyroZ56 (dbl), bodyGyroZ57
+##   (dbl), bodyGyroZ58 (dbl), bodyGyroZ59 (dbl), bodyGyroZ60 (dbl),
+##   bodyGyroZ61 (dbl), bodyGyroZ62 (dbl), bodyGyroZ63 (dbl), bodyGyroZ64
+##   (dbl), bodyGyroZ65 (dbl), bodyGyroZ66 (dbl), bodyGyroZ67 (dbl),
+##   bodyGyroZ68 (dbl), bodyGyroZ69 (dbl), bodyGyroZ70 (dbl), bodyGyroZ71
+##   (dbl), bodyGyroZ72 (dbl), bodyGyroZ73 (dbl), bodyGyroZ74 (dbl),
+##   bodyGyroZ75 (dbl), bodyGyroZ76 (dbl), bodyGyroZ77 (dbl), bodyGyroZ78
+##   (dbl), bodyGyroZ79 (dbl), bodyGyroZ80 (dbl), bodyGyroZ81 (dbl),
+##   bodyGyroZ82 (dbl), bodyGyroZ83 (dbl), bodyGyroZ84 (dbl), bodyGyroZ85
+##   (dbl), bodyGyroZ86 (dbl), bodyGyroZ87 (dbl), bodyGyroZ88 (dbl),
+##   bodyGyroZ89 (dbl), bodyGyroZ90 (dbl), bodyGyroZ91 (dbl), bodyGyroZ92
+##   (dbl), bodyGyroZ93 (dbl), bodyGyroZ94 (dbl), bodyGyroZ95 (dbl),
+##   bodyGyroZ96 (dbl), bodyGyroZ97 (dbl), bodyGyroZ98 (dbl), bodyGyroZ99
+##   (dbl), bodyGyroZ100 (dbl), bodyGyroZ101 (dbl), bodyGyroZ102 (dbl),
+##   bodyGyroZ103 (dbl), bodyGyroZ104 (dbl), bodyGyroZ105 (dbl), bodyGyroZ106
+##   (dbl), bodyGyroZ107 (dbl), bodyGyroZ108 (dbl), bodyGyroZ109 (dbl),
+##   bodyGyroZ110 (dbl), bodyGyroZ111 (dbl), bodyGyroZ112 (dbl), bodyGyroZ113
+##   (dbl), bodyGyroZ114 (dbl), bodyGyroZ115 (dbl), bodyGyroZ116 (dbl),
+##   bodyGyroZ117 (dbl), bodyGyroZ118 (dbl), bodyGyroZ119 (dbl), bodyGyroZ120
+##   (dbl), bodyGyroZ121 (dbl), bodyGyroZ122 (dbl), bodyGyroZ123 (dbl),
+##   bodyGyroZ124 (dbl), bodyGyroZ125 (dbl), bodyGyroZ126 (dbl), bodyGyroZ127
+##   (dbl), bodyGyroZ128 (dbl), totAccX1 (dbl), totAccX2 (dbl), totAccX3
+##   (dbl), totAccX4 (dbl), totAccX5 (dbl), totAccX6 (dbl), totAccX7 (dbl),
+##   totAccX8 (dbl), totAccX9 (dbl), totAccX10 (dbl), totAccX11 (dbl),
+##   totAccX12 (dbl), totAccX13 (dbl), totAccX14 (dbl), totAccX15 (dbl),
+##   totAccX16 (dbl), totAccX17 (dbl), totAccX18 (dbl), totAccX19 (dbl),
+##   totAccX20 (dbl), totAccX21 (dbl), totAccX22 (dbl), totAccX23 (dbl),
+##   totAccX24 (dbl), totAccX25 (dbl), totAccX26 (dbl), totAccX27 (dbl),
+##   totAccX28 (dbl), totAccX29 (dbl), totAccX30 (dbl), totAccX31 (dbl),
+##   totAccX32 (dbl), totAccX33 (dbl), totAccX34 (dbl), totAccX35 (dbl),
+##   totAccX36 (dbl), totAccX37 (dbl), totAccX38 (dbl), totAccX39 (dbl),
+##   totAccX40 (dbl), totAccX41 (dbl), totAccX42 (dbl), totAccX43 (dbl),
+##   totAccX44 (dbl), totAccX45 (dbl), totAccX46 (dbl), totAccX47 (dbl),
+##   totAccX48 (dbl), totAccX49 (dbl), totAccX50 (dbl), totAccX51 (dbl),
+##   totAccX52 (dbl), totAccX53 (dbl), totAccX54 (dbl), totAccX55 (dbl),
+##   totAccX56 (dbl), totAccX57 (dbl), totAccX58 (dbl), totAccX59 (dbl),
+##   totAccX60 (dbl), totAccX61 (dbl), totAccX62 (dbl), totAccX63 (dbl),
+##   totAccX64 (dbl), totAccX65 (dbl), totAccX66 (dbl), totAccX67 (dbl),
+##   totAccX68 (dbl), totAccX69 (dbl), totAccX70 (dbl), totAccX71 (dbl),
+##   totAccX72 (dbl), totAccX73 (dbl), totAccX74 (dbl), totAccX75 (dbl),
+##   totAccX76 (dbl), totAccX77 (dbl), totAccX78 (dbl), totAccX79 (dbl),
+##   totAccX80 (dbl), totAccX81 (dbl), totAccX82 (dbl), totAccX83 (dbl),
+##   totAccX84 (dbl), totAccX85 (dbl), totAccX86 (dbl), totAccX87 (dbl),
+##   totAccX88 (dbl), totAccX89 (dbl), totAccX90 (dbl), totAccX91 (dbl),
+##   totAccX92 (dbl), totAccX93 (dbl), totAccX94 (dbl), totAccX95 (dbl),
+##   totAccX96 (dbl), totAccX97 (dbl), totAccX98 (dbl), totAccX99 (dbl),
+##   totAccX100 (dbl), totAccX101 (dbl), totAccX102 (dbl), totAccX103 (dbl),
+##   totAccX104 (dbl), totAccX105 (dbl), totAccX106 (dbl), totAccX107 (dbl),
+##   totAccX108 (dbl), totAccX109 (dbl), totAccX110 (dbl), totAccX111 (dbl),
+##   totAccX112 (dbl), totAccX113 (dbl), totAccX114 (dbl), totAccX115 (dbl),
+##   totAccX116 (dbl), totAccX117 (dbl), totAccX118 (dbl), totAccX119 (dbl),
+##   totAccX120 (dbl), totAccX121 (dbl), totAccX122 (dbl), totAccX123 (dbl),
+##   totAccX124 (dbl), totAccX125 (dbl), totAccX126 (dbl), totAccX127 (dbl),
+##   totAccX128 (dbl), totAccY1 (dbl), totAccY2 (dbl), totAccY3 (dbl),
+##   totAccY4 (dbl), totAccY5 (dbl), totAccY6 (dbl), totAccY7 (dbl), totAccY8
+##   (dbl), totAccY9 (dbl), totAccY10 (dbl), totAccY11 (dbl), totAccY12
+##   (dbl), totAccY13 (dbl), totAccY14 (dbl), totAccY15 (dbl), totAccY16
+##   (dbl), totAccY17 (dbl), totAccY18 (dbl), totAccY19 (dbl), totAccY20
+##   (dbl), totAccY21 (dbl), totAccY22 (dbl), totAccY23 (dbl), totAccY24
+##   (dbl), totAccY25 (dbl), totAccY26 (dbl), totAccY27 (dbl), totAccY28
+##   (dbl), totAccY29 (dbl), totAccY30 (dbl), totAccY31 (dbl), totAccY32
+##   (dbl), totAccY33 (dbl), totAccY34 (dbl), totAccY35 (dbl), totAccY36
+##   (dbl), totAccY37 (dbl), totAccY38 (dbl), totAccY39 (dbl), totAccY40
+##   (dbl), totAccY41 (dbl), totAccY42 (dbl), totAccY43 (dbl), totAccY44
+##   (dbl), totAccY45 (dbl), totAccY46 (dbl), totAccY47 (dbl), totAccY48
+##   (dbl), totAccY49 (dbl), totAccY50 (dbl), totAccY51 (dbl), totAccY52
+##   (dbl), totAccY53 (dbl), totAccY54 (dbl), totAccY55 (dbl), totAccY56
+##   (dbl), totAccY57 (dbl), totAccY58 (dbl), totAccY59 (dbl), totAccY60
+##   (dbl), totAccY61 (dbl), totAccY62 (dbl), totAccY63 (dbl), totAccY64
+##   (dbl), totAccY65 (dbl), totAccY66 (dbl), totAccY67 (dbl), totAccY68
+##   (dbl), totAccY69 (dbl), totAccY70 (dbl), totAccY71 (dbl), totAccY72
+##   (dbl), totAccY73 (dbl), totAccY74 (dbl), totAccY75 (dbl), totAccY76
+##   (dbl), totAccY77 (dbl), totAccY78 (dbl), totAccY79 (dbl), totAccY80
+##   (dbl), totAccY81 (dbl), totAccY82 (dbl), totAccY83 (dbl), totAccY84
+##   (dbl), totAccY85 (dbl), totAccY86 (dbl), totAccY87 (dbl), totAccY88
+##   (dbl), totAccY89 (dbl), totAccY90 (dbl), totAccY91 (dbl), totAccY92
+##   (dbl), totAccY93 (dbl), totAccY94 (dbl), totAccY95 (dbl), totAccY96
+##   (dbl), totAccY97 (dbl), totAccY98 (dbl), totAccY99 (dbl), totAccY100
+##   (dbl), totAccY101 (dbl), totAccY102 (dbl), totAccY103 (dbl), totAccY104
+##   (dbl), totAccY105 (dbl), totAccY106 (dbl), totAccY107 (dbl), totAccY108
+##   (dbl), totAccY109 (dbl), totAccY110 (dbl), totAccY111 (dbl), totAccY112
+##   (dbl), totAccY113 (dbl), totAccY114 (dbl), totAccY115 (dbl), totAccY116
+##   (dbl), totAccY117 (dbl), totAccY118 (dbl), totAccY119 (dbl), totAccY120
+##   (dbl), totAccY121 (dbl), totAccY122 (dbl), totAccY123 (dbl), totAccY124
+##   (dbl), totAccY125 (dbl), totAccY126 (dbl), totAccY127 (dbl), totAccY128
+##   (dbl), totAccZ1 (dbl), totAccZ2 (dbl), totAccZ3 (dbl), totAccZ4 (dbl),
+##   totAccZ5 (dbl), totAccZ6 (dbl), totAccZ7 (dbl), totAccZ8 (dbl), totAccZ9
+##   (dbl), totAccZ10 (dbl), totAccZ11 (dbl), totAccZ12 (dbl), totAccZ13
+##   (dbl), totAccZ14 (dbl), totAccZ15 (dbl), totAccZ16 (dbl), totAccZ17
+##   (dbl), totAccZ18 (dbl), totAccZ19 (dbl), totAccZ20 (dbl), totAccZ21
+##   (dbl), totAccZ22 (dbl), totAccZ23 (dbl), totAccZ24 (dbl), totAccZ25
+##   (dbl), totAccZ26 (dbl), totAccZ27 (dbl), totAccZ28 (dbl), totAccZ29
+##   (dbl), totAccZ30 (dbl), totAccZ31 (dbl), totAccZ32 (dbl), totAccZ33
+##   (dbl), totAccZ34 (dbl), totAccZ35 (dbl), totAccZ36 (dbl), totAccZ37
+##   (dbl), totAccZ38 (dbl), totAccZ39 (dbl), totAccZ40 (dbl), totAccZ41
+##   (dbl), totAccZ42 (dbl), totAccZ43 (dbl), totAccZ44 (dbl), totAccZ45
+##   (dbl), totAccZ46 (dbl), totAccZ47 (dbl), totAccZ48 (dbl), totAccZ49
+##   (dbl), totAccZ50 (dbl), totAccZ51 (dbl), totAccZ52 (dbl), totAccZ53
+##   (dbl), totAccZ54 (dbl), totAccZ55 (dbl), totAccZ56 (dbl), totAccZ57
+##   (dbl), totAccZ58 (dbl), totAccZ59 (dbl), totAccZ60 (dbl), totAccZ61
+##   (dbl), totAccZ62 (dbl), totAccZ63 (dbl), totAccZ64 (dbl), totAccZ65
+##   (dbl), totAccZ66 (dbl), totAccZ67 (dbl), totAccZ68 (dbl), totAccZ69
+##   (dbl), totAccZ70 (dbl), totAccZ71 (dbl), totAccZ72 (dbl), totAccZ73
+##   (dbl), totAccZ74 (dbl), totAccZ75 (dbl), totAccZ76 (dbl), totAccZ77
+##   (dbl), totAccZ78 (dbl), totAccZ79 (dbl), totAccZ80 (dbl), totAccZ81
+##   (dbl), totAccZ82 (dbl), totAccZ83 (dbl), totAccZ84 (dbl), totAccZ85
+##   (dbl), totAccZ86 (dbl), totAccZ87 (dbl), totAccZ88 (dbl), totAccZ89
+##   (dbl), totAccZ90 (dbl), totAccZ91 (dbl), totAccZ92 (dbl), totAccZ93
+##   (dbl), totAccZ94 (dbl), totAccZ95 (dbl), totAccZ96 (dbl), totAccZ97
+##   (dbl), totAccZ98 (dbl), totAccZ99 (dbl), totAccZ100 (dbl), totAccZ101
+##   (dbl), totAccZ102 (dbl), totAccZ103 (dbl), totAccZ104 (dbl), totAccZ105
+##   (dbl), totAccZ106 (dbl), totAccZ107 (dbl), totAccZ108 (dbl), totAccZ109
+##   (dbl), totAccZ110 (dbl), totAccZ111 (dbl), totAccZ112 (dbl), totAccZ113
+##   (dbl), totAccZ114 (dbl), totAccZ115 (dbl), totAccZ116 (dbl), totAccZ117
+##   (dbl), totAccZ118 (dbl), totAccZ119 (dbl), totAccZ120 (dbl), totAccZ121
+##   (dbl), totAccZ122 (dbl), totAccZ123 (dbl), totAccZ124 (dbl), totAccZ125
+##   (dbl), totAccZ126 (dbl), totAccZ127 (dbl), totAccZ128 (dbl), activity
+##   (chr)</code></pre>
+<pre class="r"><code>cat(&quot;\n=====End of partial printout: dataAll \n&quot;)</code></pre>
+<pre><code>## 
+## =====End of partial printout: dataAll</code></pre>
+<pre class="r"><code>#####
 #### Goal 2. Means and SDs.
 #####
 
@@ -241,72 +573,64 @@ write.table(dataMeansSdsAll,file=&quot;MeansAndSdsMeasurements.txt&quot;,row.nam
 ## on the particular subject and activity)
 ###
 
-##
-# create a function, createMeanvar, that will create data containing: 
-# subject (ID), train/test indicator (testOrTrain), activity and mean (based on 128 measurements) of one of the specified nine variables
-##
-
 # create full data containing ID, testOrTrain, acts, and the mean (based on 128 measurement per variable)
 # of each of the nine experimentally-measured variables (in dataMeansAll)
-dataAll2&lt;-cbind(select(dataAll,ID,testOrTrain,acts),dataMeansAll)
+dataAll2&lt;-cbind(select(dataAll,ID,testOrTrain,activity),dataMeansAll)
 
-createMeanVar&lt;- function(x) {
-  # integer x is one of 
-  # 1 (&quot;bodyAccXMn&quot;,) 2 (&quot;bodyAccYMn&quot;), 3 (&quot;bodyAccZMn&quot;),
-  # 4 (&quot;bodyGyroXMn&quot;), 5(&quot;bodyGyroYMn&quot;), 6(&quot;bodyGyroZMn&quot;),
-  # 7 (&quot;totAccXMn&quot;), 8 (&quot;totAccYMn&quot;), or 9 (&quot;totAccZMn&quot;)
-  
-  # for each subject by activity combination, calculate the mean of all 
-  # the mean measurements for the variable given
-  
-  # initialize data frame
-    dataMeansByActs&lt;-data.frame(matrix(1:30,30,1,dimnames=list(rep(&quot;&quot;,30),c(&quot;ID&quot;))))
-  
-  # loop through the six activities
-  for (iActs in 1:6){ 
-    # calculate the mean of all the mean measurements for this activity by subject
-    if (x==1){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyAccXMn),by=(ID&lt;-sort(ID))]
-    }
-    if(x==2){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyAccYMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==3){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyAccZMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==4){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyGyroXMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==5){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyGyroYMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==6){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(bodyGyroZMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==7){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(totAccXMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==8){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(totAccYMn),by=(ID&lt;-sort(ID))]
-    }
-    if (x==9){
-      actsList&lt;-filter(dataAll2,acts==iActs)[,mean(totAccZMn),by=(ID&lt;-sort(ID))]
-    }
-    # create the column name
-    colnames(actsList)&lt;-c(&quot;ID&quot;,paste(colnames(dataMeansAll)[[x]],&quot;Acts&quot;,iActs,sep=&quot;&quot;))
-    # merge this new column with existing data frame
-    dataMeansByActs&lt;-merge(dataMeansByActs,actsList,by=&quot;ID&quot;)
-  }
-  
-  # output the merged data (except ID) containing the six activties for this variable
-  select(dataMeansByActs,-ID) 
-} # this produces a data.frame of dim 30 by 6 
+# use by_group to group by ID and by activity; summarize by getting means of nine varibles
+# this gives a data table of dimensions 30 x 12; 
+#rows: 30 IDs, columns: ID, testOrTrain, activity and the overall means of the nine variables 
+ggDataAll2&lt;-group_by(dataAll2,ID,testOrTrain,activity)
+dataMeansByActsAll&lt;-summarize(ggDataAll2,
+                              bodyAccXMnAct=mean(bodyAccXMn),
+                              bodyAccYMnAct=mean(bodyAccYMn),
+                              bodyAccZMnAct=mean(bodyAccZMn),
+                              bodyGyroXMnAct=mean(bodyGyroXMn),
+                              bodyGyroYMnAct=mean(bodyGyroYMn),
+                              bodyGyroZMnAct=mean(bodyGyroZMn),
+                              totAccXMnAct=mean(totAccXMn),
+                              totAccYMnAct=mean(totAccYMn),
+                              totAccZMnAct=mean(totAccZMn)
+)
 
+# get a view of the first few lines (right-truncated) of dataMeansByActsAll
+cat(&quot;\n\n===============\n&quot;)</code></pre>
+<pre><code>## 
+## 
+## ===============</code></pre>
+<pre class="r"><code>cat(&quot; A printout of the first 10 lines of dataMeansByActsAll:\n\n&quot;)</code></pre>
+<pre><code>##  A printout of the first 10 lines of dataMeansByActsAll:</code></pre>
+<pre class="r"><code>print(dataMeansByActsAll)</code></pre>
+<pre><code>## Source: local data frame [180 x 12]
+## Groups: ID, testOrTrain [?]
+## 
+##       ID testOrTrain             activity bodyAccXMnAct bodyAccYMnAct
+##    (int)       (chr)                (chr)         (dbl)         (dbl)
+## 1      1       TRAIN            1-WALKING -5.049120e-05 -0.0001288541
+## 2      1       TRAIN   2-WALKING_UPSTAIRS -4.557285e-03 -0.0035745527
+## 3      1       TRAIN 3-WALKING_DOWNSTAIRS  2.393125e-03  0.0037867992
+## 4      1       TRAIN            4-SITTING -3.366988e-03  0.0083029687
+## 5      1       TRAIN           5-STANDING  2.765324e-04  0.0005248088
+## 6      1       TRAIN             6-LAYING -1.153589e-02 -0.0122609074
+## 7      2        TEST            1-WALKING -2.368235e-04 -0.0007640920
+## 8      2        TEST   2-WALKING_UPSTAIRS -6.267116e-03 -0.0022417461
+## 9      2        TEST 3-WALKING_DOWNSTAIRS  8.156667e-06 -0.0028970214
+## 10     2        TEST            4-SITTING -1.006524e-04  0.0007606280
+## ..   ...         ...                  ...           ...           ...
+## Variables not shown: bodyAccZMnAct (dbl), bodyGyroXMnAct (dbl),
+##   bodyGyroYMnAct (dbl), bodyGyroZMnAct (dbl), totAccXMnAct (dbl),
+##   totAccYMnAct (dbl), totAccZMnAct (dbl)</code></pre>
+<pre class="r"><code>cat(&quot;\n=====End of partial printout: dataMeansByactsAll \n\n&quot;)</code></pre>
+<pre><code>## 
+## =====End of partial printout: dataMeansByactsAll</code></pre>
+<pre class="r"><code>###
 ##
-# create and merge the data for the nine variables
-# idNum is 1:30
-# merge testOrTrain for test and train
+# create table containing information regarding the number of observations
+# (each with 128 measurements) by subject and activity;  each count is also the 
+# number of means that was averaged to get the overall mean variable measurement
+# by subject and activity
 ##
+###
 
 # obtain the train/test IDs and testOrTrains
 idTrain&lt;-dimnames(table(select(dataTrainAll,ID,testOrTrain)))$ID
@@ -316,8 +640,6 @@ testOrTrain&lt;-c(rep(&quot;TRAIN&quot;,length(idTrain)),rep(&quot;TEST&quot;,le
 # bind the ID and tesCd then sort by ID
 IDtestOrTrain&lt;- cbind(ID,testOrTrain)[order(ID),]
 
-# bind ID, tesCd, and means of the 9 experimentally-measured variables by subject and activity
-dataMeansByActsAll&lt;-cbind(IDtestOrTrain,createMeanVar(1),createMeanVar(2),createMeanVar(3),createMeanVar(4),createMeanVar(5),createMeanVar(6),createMeanVar(7),createMeanVar(8),createMeanVar(9))
 
 # create table containing information regarding the number of observations
 # (each with 128 measurements) by subject and activity;  each count is also the 
@@ -345,36 +667,36 @@ cat(&quot;\n Frequency table: Number of Observations, Subject by Activity\n&quot
 ##  Frequency table: Number of Observations, Subject by Activity</code></pre>
 <pre class="r"><code>write.table(dt1,row.name=FALSE,quote=FALSE)</code></pre>
 <pre><code>## ID testOrTrain 1-WALKING 2-WALKING_UPSTAIRS 3-WALKING_DOWNSTAIRS 4-SITTING 5-STANDING 6-LAYING
-## 1 TRAIN 50 47 53 95 49 53
-## 2 TEST 48 46 54 59 47 48
-## 3 TRAIN 62 52 61 58 49 59
-## 4 TEST 54 50 56 60 45 52
-## 5 TRAIN 52 44 56 56 47 47
-## 6 TRAIN 57 55 57 57 48 51
-## 7 TRAIN 52 48 53 57 47 51
-## 8 TRAIN 54 46 54 48 38 41
-## 9 TEST 50 50 45 52 42 49
-## 10 TEST 58 54 44 53 38 47
-## 11 TRAIN 57 53 47 59 46 54
-## 12 TEST 60 51 61 50 46 52
-## 13 TEST 62 49 57 57 47 55
-## 14 TRAIN 51 54 60 59 45 54
-## 15 TRAIN 72 59 53 54 42 48
-## 16 TRAIN 70 69 78 51 47 51
-## 17 TRAIN 71 64 78 61 46 48
-## 18 TEST 65 57 73 56 55 58
-## 19 TRAIN 83 73 73 52 39 40
-## 20 TEST 68 66 73 51 45 51
-## 21 TRAIN 90 85 89 52 45 47
-## 22 TRAIN 72 62 63 46 36 42
-## 23 TRAIN 72 68 68 59 54 51
-## 24 TEST 72 68 69 58 55 59
-## 25 TRAIN 73 65 74 74 58 65
-## 26 TRAIN 76 78 74 59 50 55
-## 27 TRAIN 74 70 80 57 44 51
-## 28 TRAIN 80 72 79 54 46 51
-## 29 TRAIN 69 60 65 53 48 49
-## 30 TRAIN 70 62 59 65 62 65</code></pre>
+## 1 TRAIN 95 53 49 47 53 50
+## 2 TEST 59 48 47 46 54 48
+## 3 TRAIN 58 59 49 52 61 62
+## 4 TEST 60 52 45 50 56 54
+## 5 TRAIN 56 47 47 44 56 52
+## 6 TRAIN 57 51 48 55 57 57
+## 7 TRAIN 57 51 47 48 53 52
+## 8 TRAIN 48 41 38 46 54 54
+## 9 TEST 52 49 42 50 45 50
+## 10 TEST 53 47 38 54 44 58
+## 11 TRAIN 59 54 46 53 47 57
+## 12 TEST 50 52 46 51 61 60
+## 13 TEST 57 55 47 49 57 62
+## 14 TRAIN 59 54 45 54 60 51
+## 15 TRAIN 54 48 42 59 53 72
+## 16 TRAIN 51 51 47 69 78 70
+## 17 TRAIN 61 48 46 64 78 71
+## 18 TEST 56 58 55 57 73 65
+## 19 TRAIN 52 40 39 73 73 83
+## 20 TEST 51 51 45 66 73 68
+## 21 TRAIN 52 47 45 85 89 90
+## 22 TRAIN 46 42 36 62 63 72
+## 23 TRAIN 59 51 54 68 68 72
+## 24 TEST 58 59 55 68 69 72
+## 25 TRAIN 74 65 58 65 74 73
+## 26 TRAIN 59 55 50 78 74 76
+## 27 TRAIN 57 51 44 70 80 74
+## 28 TRAIN 54 51 46 72 79 80
+## 29 TRAIN 53 49 48 60 65 69
+## 30 TRAIN 65 65 62 62 59 70</code></pre>
 <pre class="r"><code># close diagnostics.txt
 sink()</code></pre>
 
