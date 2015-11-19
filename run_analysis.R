@@ -108,7 +108,7 @@ dataTest<-constructData("test")   #        "
 cat("\n Number of trials (observations) per subject (including all 6 activities): train data \n")
 print(dataTrain[[4]])
 cat("Total train observations: ", sum(dataTrain[[4]]),"\n")
-cat("\n Number of trials (observations) per subject (including all  activities): test data\n")
+cat("\n Number of trials (observations) per subject (including all 6 activities): test data\n")
 print(dataTest[[4]])
 cat("Total test observations: ", sum(dataTest[[4]]),"\n")
 
@@ -126,7 +126,7 @@ dataAll<-tbl_df(rbind(dataTrainAll,dataTestAll))
 
 # print out the first few lines of dataAll
 cat("\n\n===============\n")
-cat(" A printout of the first 10 lines of dataMeansByActsAll:\n\n")
+cat(" A printout of the first 10 lines of dataAll:\n\n")
 print(dataAll)
 cat("\n=====End of partial printout: dataAll \n")
 
@@ -179,7 +179,7 @@ dataMeansByActsAll<-summarize(ggDataAll2,
 cat("\n\n===============\n")
 cat(" A printout of the first 10 lines of dataMeansByActsAll:\n\n")
 print(dataMeansByActsAll)
-cat("\n=====End of partial printout: dataMeansByactsAll \n\n")
+cat("\n=====End of partial printout: dataMeansByActsAll \n\n")
 
 ###
 ##

@@ -5,7 +5,7 @@ idNum
 347 341 302 325 308 281 316 323 328 366 368 360 408 321 372 409 392 376 382 344 383 
 Total train observations:  7352 
 
- Number of trials (observations) per subject (including all  activities): test data
+ Number of trials (observations) per subject (including all 6 activities): test data
 idNum
   2   4   9  10  12  13  18  20  24 
 302 317 288 294 320 327 364 354 381 
@@ -13,7 +13,7 @@ Total test observations:  2947
 
 
 ===============
- A printout of the first 10 lines of dataMeansByActsAll:
+ A printout of the first 10 lines of dataAll:
 
 Source: local data frame [10,299 x 1,156]
 
@@ -298,7 +298,7 @@ Groups: ID, testOrTrain [?]
 Variables not shown: bodyGyroXMnAct (dbl), bodyGyroYMnAct (dbl), bodyGyroZMnAct (dbl),
   totAccXMnAct (dbl), totAccYMnAct (dbl), totAccZMnAct (dbl)
 
-=====End of partial printout: dataMeansByactsAll 
+=====End of partial printout: dataMeansByActsAll 
 
 
  Frequency table: Number of Observations, Subject by Activity

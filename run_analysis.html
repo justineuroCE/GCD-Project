@@ -63,7 +63,7 @@ img {
 <div id="header">
 <h1 class="title">run_analysis.R</h1>
 <h4 class="author"><em>juro</em></h4>
-<h4 class="date"><em>Thu Nov 19 14:05:19 2015</em></h4>
+<h4 class="date"><em>Thu Nov 19 15:14:06 2015</em></h4>
 </div>
 
 
@@ -198,9 +198,9 @@ cat(&quot;\n Number of trials (observations) per subject (including all 6 activi
 ## 382 344 383</code></pre>
 <pre class="r"><code>cat(&quot;Total train observations: &quot;, sum(dataTrain[[4]]),&quot;\n&quot;)</code></pre>
 <pre><code>## Total train observations:  7352</code></pre>
-<pre class="r"><code>cat(&quot;\n Number of trials (observations) per subject (including all  activities): test data\n&quot;)</code></pre>
+<pre class="r"><code>cat(&quot;\n Number of trials (observations) per subject (including all 6 activities): test data\n&quot;)</code></pre>
 <pre><code>## 
-##  Number of trials (observations) per subject (including all  activities): test data</code></pre>
+##  Number of trials (observations) per subject (including all 6 activities): test data</code></pre>
 <pre class="r"><code>print(dataTest[[4]])</code></pre>
 <pre><code>## idNum
 ##   2   4   9  10  12  13  18  20  24 
@@ -223,8 +223,8 @@ cat(&quot;\n\n===============\n&quot;)</code></pre>
 <pre><code>## 
 ## 
 ## ===============</code></pre>
-<pre class="r"><code>cat(&quot; A printout of the first 10 lines of dataMeansByActsAll:\n\n&quot;)</code></pre>
-<pre><code>##  A printout of the first 10 lines of dataMeansByActsAll:</code></pre>
+<pre class="r"><code>cat(&quot; A printout of the first 10 lines of dataAll:\n\n&quot;)</code></pre>
+<pre><code>##  A printout of the first 10 lines of dataAll:</code></pre>
 <pre class="r"><code>print(dataAll)</code></pre>
 <pre><code>## Source: local data frame [10,299 x 1,156]
 ## 
@@ -620,9 +620,9 @@ cat(&quot;\n\n===============\n&quot;)</code></pre>
 ## Variables not shown: bodyAccZMnAct (dbl), bodyGyroXMnAct (dbl),
 ##   bodyGyroYMnAct (dbl), bodyGyroZMnAct (dbl), totAccXMnAct (dbl),
 ##   totAccYMnAct (dbl), totAccZMnAct (dbl)</code></pre>
-<pre class="r"><code>cat(&quot;\n=====End of partial printout: dataMeansByactsAll \n\n&quot;)</code></pre>
+<pre class="r"><code>cat(&quot;\n=====End of partial printout: dataMeansByActsAll \n\n&quot;)</code></pre>
 <pre><code>## 
-## =====End of partial printout: dataMeansByactsAll</code></pre>
+## =====End of partial printout: dataMeansByActsAll</code></pre>
 <pre class="r"><code>###
 ##
 # create table containing information regarding the number of observations
