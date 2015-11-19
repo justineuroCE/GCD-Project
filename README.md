@@ -8,24 +8,24 @@ The files in this repository are for the analyses of data from the [Human Activi
 
 The files in this directory are:  
 
-* README.md --- this file
-* README.html --- a *rmarkdown + markdown*-processed version of README.md in HTML format
-* LICENSE --- license file for the contents of this folder
-* .gitignore
-* r_analysis.R  --- an R script used for the analyses that does the following:
+* **README.md** --- this file
+* **README.html** --- a *rmarkdown + markdown*-processed version of README.md in HTML format
+* **LICENSE** --- license file for the contents of this folder
+* **.gitignore**
+* **r_analysis.R**  --- an R script used for the analyses that does the following:
     + Goal 1. Merges the training and the test sets to create one data set.
     + Goal 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
     + Goal 3. Uses descriptive activity names to name the activities in the data set
     + Goal 4. Appropriately labels the data set with descriptive variable names. 
     + Goal 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-* r_analysis.html --- an RStudio Notebook compile output of a run of r_analysis.R in HTML format
-* CodeBook.md --- a codebook for the datasets produced by r_analysis.R
-* CodeBook.html --- a *rmarkdown + markdown*-processed version of CodeBook.md in HTML format 
-* MarkdownHereGitHub.css --- a stylesheet used for CodeBook.html that is a modified version of that by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added 
-* diagnostics.txt --- a sink file; contains frequency tables for the number of observations by subject 
-* tableFreqSubjectByActivity.txt --- frequency table for the number of observations by subject and activity
+* **r_analysis.html** --- an RStudio Notebook compile output of a run of r_analysis.R in HTML format
+* **CodeBook.md** --- a codebook for the datasets produced by r_analysis.R
+* **CodeBook.html** --- a *rmarkdown + markdown*-processed version of CodeBook.md in HTML format 
+* **MarkdownHereGitHub.css** --- a stylesheet used for CodeBook.html that is a modified version of that by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added 
+* **diagnostics.txt** --- a sink file; contains frequency tables for the number of observations by subject and some partial printouts of the required datasets
+* **tableFreqSubjectByActivity.txt** --- frequency table for the number of observations by subject and activity
 
-#### How to use the run_analysis.R
+#### How to use run_analysis.R
 
 To use **run_analysis.R**, which is a regular R-script:
 
@@ -36,7 +36,7 @@ Among other things, **run_analysis.R** creates the following data frames/data ta
 
 * **diagnostics.txt** - a sink file containing some useful supplementary information and intermediate results (a copy is in this directory); the top part of this file contains frequency tables containing information of test/train status, and the number of observations (trials) obtained per subject while the bottom part contains a frequency distribution table on the number of observations obtained by subject and acitivty
 * **dataAll** - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9\*128 = 1156 columns); a partial printout can be found in the file **diagnostics.txt** located in this same directory
-* **dataMeansSdsAll** - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of  each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (^^dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file *MeansandSdsMeasurements.txt* and uploaded to the course site)
+* **dataMeansSdsAll** - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of  each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (**dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file *MeansandSdsMeasurements.txt* and uploaded to the course site)
 * **dataMeansByActsAll** - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured;  this data frame has 30\*6 = 180 rows and 3+9 = 12 columns (*ID*, *testOrTrain*, *activity*, and overall means of the nine variables); a partial printout can be found in the file **diagnostics.txt** located in this same directory
 
 

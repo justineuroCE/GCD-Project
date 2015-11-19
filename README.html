@@ -71,11 +71,11 @@ img {
 <h4>List of files</h4>
 <p>The files in this directory are:</p>
 <ul>
-<li>README.md — this file</li>
-<li>README.html — a <em>rmarkdown + markdown</em>-processed version of README.md in HTML format</li>
-<li>LICENSE — license file for the contents of this folder</li>
-<li>.gitignore</li>
-<li>r_analysis.R — an R script used for the analyses that does the following:
+<li><strong>README.md</strong> — this file</li>
+<li><strong>README.html</strong> — a <em>rmarkdown + markdown</em>-processed version of README.md in HTML format</li>
+<li><strong>LICENSE</strong> — license file for the contents of this folder</li>
+<li><strong>.gitignore</strong></li>
+<li><strong>r_analysis.R</strong> — an R script used for the analyses that does the following:
 <ul>
 <li>Goal 1. Merges the training and the test sets to create one data set.</li>
 <li>Goal 2. Extracts only the measurements on the mean and standard deviation for each measurement.</li>
@@ -83,16 +83,16 @@ img {
 <li>Goal 4. Appropriately labels the data set with descriptive variable names.</li>
 <li>Goal 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.</li>
 </ul></li>
-<li>r_analysis.html — an RStudio Notebook compile output of a run of r_analysis.R in HTML format</li>
-<li>CodeBook.md — a codebook for the datasets produced by r_analysis.R</li>
-<li>CodeBook.html — a <em>rmarkdown + markdown</em>-processed version of CodeBook.md in HTML format</li>
-<li>MarkdownHereGitHub.css — a stylesheet used for CodeBook.html that is a modified version of that by <a href="mailto:vast@whiteants.net">Vasily Polovnyov</a> (obtained from <a href="https://github.com/adam-p/markdown-here">Markdown Here v.2.6.3</a> by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added</li>
-<li>diagnostics.txt — a sink file; contains frequency tables for the number of observations by subject</li>
-<li>tableFreqSubjectByActivity.txt — frequency table for the number of observations by subject and activity</li>
+<li><strong>r_analysis.html</strong> — an RStudio Notebook compile output of a run of r_analysis.R in HTML format</li>
+<li><strong>CodeBook.md</strong> — a codebook for the datasets produced by r_analysis.R</li>
+<li><strong>CodeBook.html</strong> — a <em>rmarkdown + markdown</em>-processed version of CodeBook.md in HTML format</li>
+<li><strong>MarkdownHereGitHub.css</strong> — a stylesheet used for CodeBook.html that is a modified version of that by <a href="mailto:vast@whiteants.net">Vasily Polovnyov</a> (obtained from <a href="https://github.com/adam-p/markdown-here">Markdown Here v.2.6.3</a> by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added</li>
+<li><strong>diagnostics.txt</strong> — a sink file; contains frequency tables for the number of observations by subject and some partial printouts of the required datasets</li>
+<li><strong>tableFreqSubjectByActivity.txt</strong> — frequency table for the number of observations by subject and activity</li>
 </ul>
 </div>
-<div id="how-to-use-the-run_analysis.r" class="section level4">
-<h4>How to use the run_analysis.R</h4>
+<div id="how-to-use-run_analysis.r" class="section level4">
+<h4>How to use run_analysis.R</h4>
 <p>To use <strong>run_analysis.R</strong>, which is a regular R-script:</p>
 <ul>
 <li>put it in the directory containing the data folder which should be named UCI_HAR_Dataset (modify the script, as appropriate, if you would rather name your data folder otherwise)</li>
@@ -102,7 +102,7 @@ img {
 <ul>
 <li><strong>diagnostics.txt</strong> - a sink file containing some useful supplementary information and intermediate results (a copy is in this directory); the top part of this file contains frequency tables containing information of test/train status, and the number of observations (trials) obtained per subject while the bottom part contains a frequency distribution table on the number of observations obtained by subject and acitivty</li>
 <li><strong>dataAll</strong> - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9*128 = 1156 columns); a partial printout can be found in the file <strong>diagnostics.txt</strong> located in this same directory</li>
-<li><strong>dataMeansSdsAll</strong> - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (^^dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file <em>MeansandSdsMeasurements.txt</em> and uploaded to the course site)</li>
+<li><strong>dataMeansSdsAll</strong> - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (<strong>dataMeansSdsAll</strong> has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file <em>MeansandSdsMeasurements.txt</em> and uploaded to the course site)</li>
 <li><strong>dataMeansByActsAll</strong> - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured; this data frame has 30*6 = 180 rows and 3+9 = 12 columns (<em>ID</em>, <em>testOrTrain</em>, <em>activity</em>, and overall means of the nine variables); a partial printout can be found in the file <strong>diagnostics.txt</strong> located in this same directory</li>
 </ul>
 </div>
