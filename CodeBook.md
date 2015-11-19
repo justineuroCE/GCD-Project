@@ -194,8 +194,8 @@ totAccZMnActs|Mean total acceleration – z component; in standard gravity units
 
 For Goal 5, to get the overall means (means of means) of the nine variables in the study: 
 
-* Step 7 --- First, I created the data frame **dataAll2** (see line 160) that contained the variables **ID**, **testOrTrain**, **activity**, and the means of all the nine variables for each of the 10299 observations (which is stored in the dta frame *dataMeansAll*; see line 140). 
-* Step 8 --- Using **dataAll2** from Step 7, I then used the **by_group** function in the *dplyr* library to group the observations by *ID* and *activity* and stored this doubly-ordered data in the data frame **ggDataAll2** (see line 165).
+* Step 7 --- First, I created the data frame **dataAll2** (see line 160) that contained the variables **ID**, **testOrTrain**, **activity**, and the means of all the nine variables for each of the 10299 observations (which was stored in the dta frame *dataMeansAll*; see line 140). 
+* Step 8 --- Using **dataAll2** from Step 7, I then used the **by\_group** function in the *dplyr* library to group the observations by *ID* and *activity* and stored this doubly-ordered data in the data frame **ggDataAll2** (see line 165).
 * Step 9 --- I then summarized **ggDataAll2**, a sumary that included the overall means of the nine experimentally-measured variables (see lines 166-175). These results were stored in the data frame **dataMeansByActsAll**.
  
 See the sink file *diagnostics.txt* (4th block of information) for a partial printout of this dataset.

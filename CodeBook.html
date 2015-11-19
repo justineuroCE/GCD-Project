@@ -638,7 +638,7 @@ img {
 </table>
 <p>For Goal 5, to get the overall means (means of means) of the nine variables in the study:</p>
 <ul>
-<li>Step 7 — First, I created the data frame <strong>dataAll2</strong> (see line 160) that contained the variables <strong>ID</strong>, <strong>testOrTrain</strong>, <strong>activity</strong>, and the means of all the nine variables for each of the 10299 observations (which is stored in the dta frame <em>dataMeansAll</em>; see line 140).</li>
+<li>Step 7 — First, I created the data frame <strong>dataAll2</strong> (see line 160) that contained the variables <strong>ID</strong>, <strong>testOrTrain</strong>, <strong>activity</strong>, and the means of all the nine variables for each of the 10299 observations (which was stored in the dta frame <em>dataMeansAll</em>; see line 140).</li>
 <li>Step 8 — Using <strong>dataAll2</strong> from Step 7, I then used the <strong>by_group</strong> function in the <em>dplyr</em> library to group the observations by <em>ID</em> and <em>activity</em> and stored this doubly-ordered data in the data frame <strong>ggDataAll2</strong> (see line 165).</li>
 <li>Step 9 — I then summarized <strong>ggDataAll2</strong>, a sumary that included the overall means of the nine experimentally-measured variables (see lines 166-175). These results were stored in the data frame <strong>dataMeansByActsAll</strong>.</li>
 </ul>
