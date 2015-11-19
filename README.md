@@ -1,6 +1,15 @@
+---
+output:
+  html_document:
+    keep_md: yes
+---
 ### README.md
 
+#### Introduction
+
 The files in this repository are for the analyses of data from the [Human Activity Recognition Using Smartphones Data Set](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones).  The zipped data file for the aforementioned study can be downloaded from [here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip).  The analyses are being conducted as part of the requirements of the Coursera Course: Getting and Cleaning Data by Jeff Leek, PhD, Roger D. Peng, PhD, Brian Caffo, PhD (https://class.coursera.org/getdata-034/human_grading/view/courses/975118/assessments/3/submissions).
+
+#### List of files
 
 The files in this directory are:  
 
@@ -17,9 +26,24 @@ The files in this directory are:
 * r_analysis.html --- an RStudio Notebook compile output of a run of r_analysis.R in HTML format
 * CodeBook.md --- a codebook for the datasets produced by r_analysis.R
 * CodeBook.html --- a *rmarkdown + markdown*-processed version of CodeBook.md in HTML format 
-* MarkdownHereGitHub.css --- a stylesheet used for CodeBook.html by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard) 
+* MarkdownHereGitHub.css --- a stylesheet used for CodeBook.html that is a modified version of that by [Vasily Polovnyov](mailto:vast@whiteants.net) (obtained from [Markdown Here v.2.6.3](https://github.com/adam-p/markdown-here) by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added 
 * diagnostics.txt --- a sink file; contains frequency tables for the number of observations by subject 
 * tableFreqSubjectByActivity.txt --- frequency table for the number of observations by subject and activity
+
+#### How to use the run_analysis.R
+
+To use **run_analysis.R**, which is a regular R-script:
+
+* put it in the directory containing the data folder which should be named UCI_HAR_Dataset (modify the script, as appropriate, if you would rather name your data folder otherwise)
+* source it at the command prompt of your RStudio console or at the R command line prompt with `source("run_analysis.R")`
+
+Among other things, **run_analysis.R** creates the following data frames/data tables and external files:
+
+* **diagnostics.txt** - a sink file containing some useful supplementary information and intermediate results (a copy is in this directory); the top part of this file contains frequency tables containing information of test/train status, and the number of observations (trials) obtained per subject while the bottom part contains a frequency distribution table on the number of observations obtained by subject and acitivty
+* **dataAll** - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9*128 = 1156 columns); a partial printout can be found in the file **diagnostics.txt** located in this same directory
+* **dataMeansSdsAll** - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of  each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (^^dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file *MeansandSdsMeasurements.txt* and uploaded to the course site)
+* **dataMeansByActsAll** - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured;  this data frame has 30*6 = 180 rows and 3+9 = 12 columns (*ID*, *testOrTrain*, *activity*, and overall means of the nine variables); a partial printout can be found in the file **diagnostics.txt** located in this same directory
+
 
 #### Acknowledgments
 

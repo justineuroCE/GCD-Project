@@ -63,7 +63,12 @@ img {
 
 <div id="readme.md" class="section level3">
 <h3>README.md</h3>
+<div id="introduction" class="section level4">
+<h4>Introduction</h4>
 <p>The files in this repository are for the analyses of data from the <a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">Human Activity Recognition Using Smartphones Data Set</a>. The zipped data file for the aforementioned study can be downloaded from <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">here</a>. The analyses are being conducted as part of the requirements of the Coursera Course: Getting and Cleaning Data by Jeff Leek, PhD, Roger D. Peng, PhD, Brian Caffo, PhD (<a href="https://class.coursera.org/getdata-034/human_grading/view/courses/975118/assessments/3/submissions">https://class.coursera.org/getdata-034/human_grading/view/courses/975118/assessments/3/submissions</a>).</p>
+</div>
+<div id="list-of-files" class="section level4">
+<h4>List of files</h4>
 <p>The files in this directory are:</p>
 <ul>
 <li>README.md — this file</li>
@@ -81,10 +86,26 @@ img {
 <li>r_analysis.html — an RStudio Notebook compile output of a run of r_analysis.R in HTML format</li>
 <li>CodeBook.md — a codebook for the datasets produced by r_analysis.R</li>
 <li>CodeBook.html — a <em>rmarkdown + markdown</em>-processed version of CodeBook.md in HTML format</li>
-<li>MarkdownHereGitHub.css — a stylesheet used for CodeBook.html by <a href="mailto:vast@whiteants.net">Vasily Polovnyov</a> (obtained from <a href="https://github.com/adam-p/markdown-here">Markdown Here v.2.6.3</a> by Adam Pritchard)</li>
+<li>MarkdownHereGitHub.css — a stylesheet used for CodeBook.html that is a modified version of that by <a href="mailto:vast@whiteants.net">Vasily Polovnyov</a> (obtained from <a href="https://github.com/adam-p/markdown-here">Markdown Here v.2.6.3</a> by Adam Pritchard); provisions that make the font-size 11 px for plain code blocks was added</li>
 <li>diagnostics.txt — a sink file; contains frequency tables for the number of observations by subject</li>
 <li>tableFreqSubjectByActivity.txt — frequency table for the number of observations by subject and activity</li>
 </ul>
+</div>
+<div id="how-to-use-the-run_analysis.r" class="section level4">
+<h4>How to use the run_analysis.R</h4>
+<p>To use <strong>run_analysis.R</strong>, which is a regular R-script:</p>
+<ul>
+<li>put it in the directory containing the data folder which should be named UCI_HAR_Dataset (modify the script, as appropriate, if you would rather name your data folder otherwise)</li>
+<li>source it at the command prompt of your RStudio console or at the R command line prompt with <code>source(&quot;run_analysis.R&quot;)</code></li>
+</ul>
+<p>Among other things, <strong>run_analysis.R</strong> creates the following data frames/data tables and external files:</p>
+<ul>
+<li><strong>diagnostics.txt</strong> - a sink file containing some useful supplementary information and intermediate results (a copy is in this directory); the top part of this file contains frequency tables containing information of test/train status, and the number of observations (trials) obtained per subject while the bottom part contains a frequency distribution table on the number of observations obtained by subject and acitivty</li>
+<li><strong>dataAll</strong> - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9*128 = 1156 columns); a partial printout can be found in the file <strong>diagnostics.txt</strong> located in this same directory</li>
+<li><strong>dataMeansSdsAll</strong> - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (^^dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file <em>MeansandSdsMeasurements.txt</em> and uploaded to the course site)</li>
+<li><strong>dataMeansByActsAll</strong> - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured; this data frame has 30<em>6 = 180 rows and 3+9 = 12 columns (</em>ID<em>, </em>testOrTrain<em>, </em>activity*, and overall means of the nine variables); a partial printout can be found in the file <strong>diagnostics.txt</strong> located in this same directory</li>
+</ul>
+</div>
 <div id="acknowledgments" class="section level4">
 <h4>Acknowledgments</h4>
 <p>With special thanks to <a href="http://www.R-project.org/">R</a> (R Core Team,2015), <a href="https://www.rstudio.com/products/rstudio/">RStudio</a> (R Studio Team, 2012), <a href="URL:%20https://github.com/hadley/dplyr">dplyr</a> (Wickham and Francois, 2015), <a href="https://github.com/Rdatatable/data.table/wiki">data.table</a> (Dowle et al., 2015), <a href="URL:%20https://github.com/rstudio/markdown">markdown (in R)</a> (Allaire et al., 2015), <a href="http://rmarkdown.rstudio.com">rmarkdown</a> (Allaire et al, 2015), <a href="http://yihui.name/knitr/">knitr</a> (Xie et al., 2015), <a href="http://johnmacfarlane.net/pandoc">pandoc</a> (MacFarlane, 2014), and <a href="http://daringfireball.net/projects/markdown/">Markdown</a> (Gruber, 2004).</p>
