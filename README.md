@@ -1,8 +1,3 @@
----
-output:
-  html_document:
-    keep_md: yes
----
 ### README.md
 
 #### Introduction
@@ -40,9 +35,9 @@ To use **run_analysis.R**, which is a regular R-script:
 Among other things, **run_analysis.R** creates the following data frames/data tables and external files:
 
 * **diagnostics.txt** - a sink file containing some useful supplementary information and intermediate results (a copy is in this directory); the top part of this file contains frequency tables containing information of test/train status, and the number of observations (trials) obtained per subject while the bottom part contains a frequency distribution table on the number of observations obtained by subject and acitivty
-* **dataAll** - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9*128 = 1156 columns); a partial printout can be found in the file **diagnostics.txt** located in this same directory
+* **dataAll** - contains the merged the train and test dataset (dataAll has 10299 rows and 4+9\*128 = 1156 columns); a partial printout can be found in the file **diagnostics.txt** located in this same directory
 * **dataMeansSdsAll** - contains only the means and standard deviations (sds) of the nine variables that were experimentally measured (the x-, y-, z- components of  each of the following three: 1) body acceleration; 2) angular velocity; 3) total acceleration); the statistics (means and sds) were each based on a set of 128 measurements (^^dataMeansSdsAll** has 10299+1 = 10300 rows and 18 columns; the first line is a header containing the 18 variable names; this was saved to the external file *MeansandSdsMeasurements.txt* and uploaded to the course site)
-* **dataMeansByActsAll** - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured;  this data frame has 30*6 = 180 rows and 3+9 = 12 columns (*ID*, *testOrTrain*, *activity*, and overall means of the nine variables); a partial printout can be found in the file **diagnostics.txt** located in this same directory
+* **dataMeansByActsAll** - contains the overall means, by ID and by activity, of each of the nine variables that were experimentally measured;  this data frame has 30\*6 = 180 rows and 3+9 = 12 columns (*ID*, *testOrTrain*, *activity*, and overall means of the nine variables); a partial printout can be found in the file **diagnostics.txt** located in this same directory
 
 
 #### Acknowledgments
