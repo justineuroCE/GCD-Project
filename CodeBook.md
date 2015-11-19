@@ -47,7 +47,7 @@ The project required us to write R codes for creating three (3) datasets: 1) raw
 
 #### **Raw Data (Goal 1)**
 
-The raw data included the variables for: 1) subject number (**ID**); 2) test/train data indicator variable (**testOrTrain**); 3) activity (**acts**); 4) 384 (3 x 128) variables for the three components (x,y, and z) of the triaxial acceleration (**bodyAccX1** to **bodyAccX128**, **bodyAccY1** to **bodyAccY128**, and **bodyAccZ1** to **bodyAccZ128**); 5) 384 variables for the three components (x,y, and z) of the triaxial angular velocity (**bodyGyroX1** to **bodyGyroX128**, **bodyGyroY1** to **bodyGyroY128**, and **bodyGyroZ1** to **bodyGyroZ128**); 6) 384 variables of the three components of the total acceleration (**totAccX1**  to **totAccX128**, **totAccY1** to **totAccY128**, and **totAccZ1** to **totAccZ128**).  This gave a total of **1155** raw dataset variables (3 non-experimentally-measured variables and 1152 experimentally-measured variables).  Strictly speaking, the raw data contained only 9 experimentally-measured variables (*bodyAccX*, *bodyAccY*, *bodyAccZ*, *bodyGyroX*, *bodyGyroY*, *bodyGyroZ*, *totAccX*, *totAccY*, and *totAccZ*) with 128 measurements for each variable (per variable, a window contained 128 measured values per observation  and 9 x 128 = 1152).  
+The raw data (stored in the data frame **dataAll**) included the variables for: 1) subject number (**ID**); 2) test/train data indicator variable (**testOrTrain**); 3) activity (**acts**); 4) 384 (3 x 128) variables for the three components (x,y, and z) of the triaxial acceleration (**bodyAccX1** to **bodyAccX128**, **bodyAccY1** to **bodyAccY128**, and **bodyAccZ1** to **bodyAccZ128**); 5) 384 variables for the three components (x,y, and z) of the triaxial angular velocity (**bodyGyroX1** to **bodyGyroX128**, **bodyGyroY1** to **bodyGyroY128**, and **bodyGyroZ1** to **bodyGyroZ128**); 6) 384 variables of the three components of the total acceleration (**totAccX1**  to **totAccX128**, **totAccY1** to **totAccY128**, and **totAccZ1** to **totAccZ128**).  This gave a total of **1155** raw dataset variables (3 non-experimentally-measured variables and 1152 experimentally-measured variables).  Strictly speaking, the raw data contained only 9 experimentally-measured variables (*bodyAccX*, *bodyAccY*, *bodyAccZ*, *bodyGyroX*, *bodyGyroY*, *bodyGyroZ*, *totAccX*, *totAccY*, and *totAccZ*) with 128 measurements for each variable (per variable, a window contained 128 measured values per observation  and 9 x 128 = 1152).  With the addition of the **activity** variable (meaningful/descriptive equivalent of the integer variables **acts**) the final dimensions of *dataAll*:  10299 x 1156.
 
 The **features** statistics (561 per subject per trial) in the file X\_train.txt/X\_test.txt (from either the train or test sub-folder of the main data folder) were not included in the raw dataset.
 
@@ -79,21 +79,27 @@ Variable|Description|Type|Values|Add'l Info
 ID|Subject ID|integer|1 to 30|21 train IDs, 9 test IDs
 testOrTrain|Indicates train or test data|categorical|TRAIN|train data
  \ |||TEST|test data
-acts|Type of activity|ordinal|1|“WALKING”
- \ |||2|“WALKING_UPSTAIRS”
- \ |||3|“WALKING_DOWNSTAIRS”
- \ |||4|“SITTING”
- \ |||5|“STANDING”
- \ |||6|“LAYING”
-bodyAccX1 to bodyAccX128|Triaxial acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccY1 to bodyAccY128|Triaxial acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccZ1 to bodyAccZ128|Triaxial acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyGyroX1 to bodyGyroX128|Triaxial angular velocity – x component; 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroY1 to bodyGyroY128|Triaxial angular velocity – y component; 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroZ1 to bodyGyroZ128|Triaxial angular velocity – z component; 128 measurements in radians/second|continuous|real| [-1,1]
-totAccX1 to totAccX128|Total acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccY1 to totAccY128|Total acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccZ1 to bodyAccZ128|Total acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
+acts|Type of activity|ordinal|1|"1-WALKING"
+ \ |||2|"2-WALKING\_UPSTAIRS"
+ \ |||3|"3-WALKING\_DOWNSTAIRS"
+ \ |||4|"4-SITTING"
+ \ |||5|"5-STANDING"
+ \ |||6|"6-LAYING"
+bodyAccX1 to bodyAccX128|Triaxial acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyAccY1 to bodyAccY128|Triaxial acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyAccZ1 to bodyAccZ128|Triaxial acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyGyroX1 to bodyGyroX128|Triaxial angular velocity – x component; 128 measurements in radians/second|continuous|real|  \ |
+bodyGyroY1 to bodyGyroY128|Triaxial angular velocity – y component; 128 measurements in radians/second|continuous|real|  \ |
+bodyGyroZ1 to bodyGyroZ128|Triaxial angular velocity – z component; 128 measurements in radians/second|continuous|real|  \ |
+totAccX1 to totAccX128|Total acceleration – x component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+totAccY1 to totAccY128|Total acceleration – y component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+totAccZ1 to bodyAccZ128|Total acceleration – z component; 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+activity|Type of activity|categorical|"1-WALKING"| \ |
+ \ |||"2-WALKING\_UPSTAIRS"| \ |
+ \ |||"3-WALKING\_DOWNSTAIRS"| \ |
+ \ |||"4-SITTING"| \ |
+ \ |||"5-STANDING"| \ |
+ \ |||"6-LAYING"| \ |
  \ |||| \ |
 
 To create the merged raw dataset:
@@ -108,16 +114,18 @@ To create the merged raw dataset:
     + loads the numerical measurements from the nine files in the Inertial Signals folder and attaches an appropriate variable label for the column label (lines 58-68)
     + creates the train/test indicator variable *testOrTrain* 
     + binds together *idNum*, *testOrTrain*, *actCd*, *bodyAccX*, *bodyAccY*, *bodyAccZ*, *bodyGyroX*, *bodyGyroY*, *bodyGyroZ*, *totAccX*, *totAccY*, and *totAccZ* (lines 75-76); the variables after *actCd* are each of dimensions 10299 x 128
-    + uses the function *actConv* to create an *activity* column containing the descriptive labels WALKING, WALKING\_UPSTAIRS, WALKING\_DOWNSTAIRS, SITTING, STANDING, or LAYING in lieu of the actCd values of 1 to 6, respectively
+    + uses the function *actConv* to create an *activity* column containing the descriptive labels 1-WALKING, 2-WALKING\_UPSTAIRS, 3-WALKING\_DOWNSTAIRS, 4-SITTING, 5-STANDING, or 6-LAYING in lieu of the actCd values of 1 to 6, respectively
     + returns a list containing four elements; the first element is a data frame called *dataPart* and contains the raw data for either *train* or *test* dataset depending on which was specified  
 * Step 3 --- I constructed the *train* and *test* datasets using *constructData("train")* and  *constructData("test")*; see lines 102-104.  
 * Step 4 --- Finally, I merged the *train* and *test* raw data into the data frame *dataAll* (see lines 120-123) that contained all the variables listed in Table 1.
+
+See the sink file *diagnostics.txt* (3rd block of indormation) for a partial printout of this dataset.
 
      
     
 #### **TIDY DATA 1: Means and Sds (Goal 2)**
 
-TIDY DATA 1 (dimensions 10299 x 18) contains the means and sds of each experimentally-measured variable for each of the 10299 observation. The means and sds of the nine (9) experimentally-measured variables  (the latter 9 variables from Table 1) were calculated based on the 128 window measurements per variable per observation.  These means and sds were extracted and saved to the file: **MeansAndSdsMeasurements.txt** and was uploaded into the course site as requested.  See the discussion after Table 2 for the R codes.
+TIDY DATA 1 (dimensions 10299 x 18; stored in the data frame **dataMeansSdsAll**) contains the means and sds of each experimentally-measured variable for each of the 10299 observation. The means and sds of the nine (9) experimentally-measured variables  (the latter 9 variables from Table 1) were calculated based on the 128 window measurements per variable per observation.  These means and sds were extracted and saved to the file: **MeansAndSdsMeasurements.txt** and was uploaded into the course site as requested.  See the discussion after Table 2 for the R codes.
 
 The data file has 10300 lines (1 header and 10299 lines of observations).  Each line of observation had the means and sds of each of the nine experimentally-measured variables (18 columns).  The header contains the 18 variable names given in Table 2.
 
@@ -125,24 +133,24 @@ The data file has 10300 lines (1 header and 10299 lines of observations).  Each 
 
 Variable|Description|Type|Values|Add'l Info
 --------|-----------|----|------|-----------
-bodyAccXMn|Mean triaxial acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccYMn|Mean triaxial acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccZMn|Mean triaxial acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyGyroXMn|Mean triaxial angular velocity – x component based on 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroYMn|Mean triaxial angular velocity – y component based on 128 measurements in radians/second|continuous|real| [-1,1]
-bodyGyroZMn|Mean triaxial angular velocity – z component based on 128 measurements in radians/second|continuous|real| [-1,1]
-totAccXMn|Mean total acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccYMn|Mean total acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-totAccZMn|Mean total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|real| [-1,1]
-bodyAccXSd|SD triaxial acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
-bodyAccYSd|SD triaxial acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
-bodyAccZSd|SD triaxial acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
-bodyGyroXSd|SD triaxial angular velocity – x component based on 128 measurements in radians/second|continuous|positive| [0,128/127]
-bodyGyroYSd|SD triaxial angular velocity – y component based on 128 measurements in radians/second|continuous|positive| [0,128/127]
-bodyGyroZSd|SD triaxial angular velocity – z component based on 128 measurements in radians/second|continuous|positive| [0,128/127]
-totAccXSd|SD total acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
-totAccYSd|SD total acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
-totAccZSd|SD total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive| [0,128/127]
+bodyAccXMn|Mean triaxial acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyAccYMn|Mean triaxial acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyAccZMn|Mean triaxial acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyGyroXMn|Mean triaxial angular velocity – x component based on 128 measurements in radians/second|continuous|real|  \ |
+bodyGyroYMn|Mean triaxial angular velocity – y component based on 128 measurements in radians/second|continuous|real|  \ |
+bodyGyroZMn|Mean triaxial angular velocity – z component based on 128 measurements in radians/second|continuous|real|  \ |
+totAccXMn|Mean total acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+totAccYMn|Mean total acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+totAccZMn|Mean total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|real|  \ |
+bodyAccXSd|SD triaxial acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
+bodyAccYSd|SD triaxial acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
+bodyAccZSd|SD triaxial acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
+bodyGyroXSd|SD triaxial angular velocity – x component based on 128 measurements in radians/second|continuous|positive|  \ |
+bodyGyroYSd|SD triaxial angular velocity – y component based on 128 measurements in radians/second|continuous|positive|  \ |
+bodyGyroZSd|SD triaxial angular velocity – z component based on 128 measurements in radians/second|continuous|positive|  \ |
+totAccXSd|SD total acceleration – x component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
+totAccYSd|SD total acceleration – y component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
+totAccZSd|SD total acceleration – z component based on 128 measurements in standard gravity units 'g'|continuous|positive|  \ |
  \ |  |  |  | \ |  
 
 To create a dataset for the means and standard deviations of the nine variables (**Goal 2**), I continued off from Step 4 for creating the raw dataset but included the additional steps that are in the second part of the **constructData** function (lines 82-88, 94).
@@ -153,13 +161,13 @@ To create a dataset for the means and standard deviations of the nine variables 
     + attaches appropriate column names (line 86) 
     + similar steps for the standard deviations (sds); see lines 86-88; the data frame dataSds that contains all the variable sds (10299 x 9) is created
     + includes *dataMeans* and *dataSds* as elements (2nd and 3rd) of a list that the function **constructData** returns (line 94)
-* Step 5 --- From the 2nd and 3rd list elements of the *train* and *test* datasets obtained in Step 3 for creating the merged raw dataset, I constructed a dataset that contained only the means and sds of the nine variables; the means and sds datasets for each of *train* and *test* were bound by columns (2nd and 3rd elements of the list), then these two column-bound datasets that resulted were bound by rows (see lines 125-140).
-* Step 6 --- Finally, **write.table** was used to create the dataset for uploading (line 141).
+* Step 5 --- From the 2nd and 3rd list elements of the *train* and *test* datasets obtained in Step 3 for creating the merged raw dataset, I constructed a dataset that contained only the means and sds of the nine variables; the means and sds datasets for each of *train* and *test* were bound by columns (2nd and 3rd elements of the list), then these two column-bound datasets that resulted were bound by rows (see lines 116-148).
+* Step 6 --- Finally, **write.table** was used to create the dataset for uploading (line 149).
 
 
-#### **TIDY DATA 2: Overall Means of the Varaibles by Subject and Activity (Goal 5)**
+#### **TIDY DATA 2: Overall Means of the Variables by Subject and Activity (Goal 5)**
 
-TIDY DATA 2 contains the means of the nine variables in the study by subject (30 IDs) and activity (six activities).  TIDY DATA 2 (dimensions: 30 x 8) reduces the number of rows of TIDY DATA 1 from 10299 to 30 as there are only 30 subjects (21 for train and 9 for test).  However, the columns in TIDY DATA 2 includes *ID*, *testOrTrain*, and six times more experimentally-measured variables (as there are 6 activities) than TIDY DATA 1.  See Table 3 below for a listing of the variables.
+TIDY DATA 2 (stored in the data frame **dataMeansByActsAll**) contains the means of the nine variables in the study by subject (30 IDs) and activity (six activities).  TIDY DATA 2 (dimensions: 30 x 12) reduces the number of rows of TIDY DATA 1 from 10299 to 30 as there are only 30 subjects (21 for train and 9 for test). The columns in TIDY DATA 2 includes *ID*, *testOrTrain*, *activity*, and the overall means of the nine experimentally-measured variables.  See Table 3 below for a listing of the variables.
 
 ##### **Table 3: TIDY DATA 2 --- Mean of the Mean Variable Measurements (from TIDY DATA 1) by Subject and Activity**
 Variable|Description|Type|Values|Add'l Info
@@ -167,26 +175,35 @@ Variable|Description|Type|Values|Add'l Info
 ID|Subject ID|integer|1 to 30|21 train IDs, 9 test IDs
 testOrTrain|Indicates train or test data|categorical|TRAIN|train data
 \  |                        |   |TEST|test data
-bodyAccXMnActs1 to bodyAccXMnActs6|Mean triaxial acceleration – x component; six activities;  in standard gravity units 'g'|continuous|real|1 “WALKING”, 2 “WALKING\_UPSTAIRS”, 3 “WALKING\_DOWNSTAIRS”, 4 “SITTING”, 5 “STANDING”, 6 “LAYING”
-bodyAccYMnActs1 to  bodyAccYMnActs6|Mean triaxial acceleration – y component; six activities; in standard gravity units 'g'|continuous|real| "
-BodyAccZMnActs1 to bodyAccZMnActs6|Mean triaxial acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
-bodyGyroXMnActs1 to bodyGyroXMnActs6|Mean triaxial angular velocity – x component; six activities; in radians/second|continuous|real|  "
-bodyGyroYMnActs1 to bodyGyroYMnActs6|Mean triaxial angular velocity – y component; six activities; in radians/second|continuous|real|  "
-bodyGyroZMnActs1 to bodyGyroZMnActs6|Mean triaxial angular velocity – z component; six activities; in radians/second|continuous|real|  "
-totAccXMnActs1 to totAccXMnActs6|Mean total acceleration – x component; six activities; in standard gravity units 'g'|continuous|real|  "
-totAccYMnActs1 to totAccYMnActs6|Mean total acceleration – y component; six activities; in standard gravity units 'g'|continuous|real|  "
-totAccZMnActs1 to totAccZMnActs6|Mean total acceleration – z component; six activities; in standard gravity units 'g'|continuous|real|  "
+activity|Type of activity|categorical|"1-WALKING"| \ |
+ \ |||"2-WALKING\_UPSTAIRS"| \ |
+ \ |||"3-WALKING\_DOWNSTAIRS"| \ |
+ \ |||"4-SITTING"| \ |
+ \ |||"5-STANDING"| \ |
+ \ |||"6-LAYING"| \ |
+bodyAccXMnActs|Mean triaxial acceleration – x component;  in standard gravity units 'g'|continuous|real|1 "1-WALKING", 2 "2-WALKING\_UPSTAIRS", 3 "3-WALKING\_DOWNSTAIRS", 4 "4-SITTING", 5 "5-STANDING", 6 "6-LAYING"
+bodyAccYMnActs|Mean triaxial acceleration – y component; in standard gravity units 'g'|continuous|real| "
+bodyAccZMnActs|Mean triaxial acceleration – z component; in standard gravity units 'g'|continuous|real|  "
+bodyGyroXMnActs|Mean triaxial angular velocity – x component; in radians/second|continuous|real|  "
+bodyGyroYMnActs|Mean triaxial angular velocity – y component; in radians/second|continuous|real|  "
+bodyGyroZMnActs|Mean triaxial angular velocity – z component; in radians/second|continuous|real|  "
+totAccXMnActs|Mean total acceleration – x component; in standard gravity units 'g'|continuous|real|  "
+totAccYMnActs|Mean total acceleration – y component; in standard gravity units 'g'|continuous|real|  "
+totAccZMnActs|Mean total acceleration – z component; in standard gravity units 'g'|continuous|real|  "
 \ |||| \ |
 
 For Goal 5, to get the overall means (means of means) of the nine variables in the study: 
 
-* Step 7 --- I created the R function **createMeanVar** that takes a data frame (10299 x 9) containing the means of one of the nine variables then calculates the mean of the means (row means), an activity at a time, by subject ID.  The image of **createMeanVar** is a data frame of dimension 30 x 1 (30 subjects as rows, mean of means of the variable specified as column).  See lines 150-205.
-* Step 8 --- I then used **createMeanVar** to process the nine data frames of variable means to get nine 30 x 1 data frames of overall means.  The ID, testOrTrain, and these nine data frames were bounded column-wise to produce a data frame with dimensions 30 x 11.  See lines 212-226. 
-
+* Step 7 --- First, I created the data frame **dataAll2** (see line 160) that contained the variables **ID**, **testOrTrain**, **activity**, and the means of all the nine variables for each of the 10299 observations (which is stored in the dta frame *dataMeansAll*; see line 140). 
+* Step 8 --- Using **dataAll2** from Step 7, I then used the **by_group** function in the *dplyr* library to group the observations by *ID* and *activity* and stored this doubly-ordered data in the data frame **ggDataAll2** (see line 165).
+* Step 9 --- I then summarized **ggDataAll2**, a sumary that included the overall means of the nine experimentally-measured variables (see lines 166-175). These results were stored in the data frame **dataMeansByActsAll**.
+ 
+See the sink file *diagnostics.txt* (4th block of information) for a partial printout of this dataset.
+ 
 
 #### **Supplementary Information**
 
-As supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity.  These were written out into the file **tableFreqSubjectByActivity.txt**.
+As supplementary information, I also constructed a frequency table that contained information on the number of observations that were eventually used for the calculation of the means and sds per subject and activity.  These were written out into the file **tableFreqSubjectByActivity.txt**.  See lines 193-223.
 
 ##### **Table 4: Supplementary Information --- Subject by Activity Frequency (Info on number of measurements on which overall variable means were based)**
 Variable|Description|Type|Values|Add'l Info
@@ -225,7 +242,7 @@ A similar set of R commands gave the following frequency table for the *test* da
     Total test observations:  2947 
 
 
-These together with the dataset in **tableFreqSubjectByActivity.txt** give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 49 for 5-STANDING, and 53 for 6-LAYING.
+These together with the dataset in **tableFreqSubjectByActivity.txt** (that also appear in the bottom section of the sink file **diagnostics.txt**) give information as to how many observations contribute information to each overall mean calculated in Goal 5.  For example, subject with ID=1 is in the train dataset and had 347 observations of which 50 were for activity 1-WALKING,  47 for 2-WALKING\_UPSTAIRS,  53 for 3-WALKING\_DOWNSTAIRS, 95 for 4-SITTING, 49 for 5-STANDING, and 53 for 6-LAYING.
 
 Lastly, the following **sessionInfo** details may come in handy for those who want to replicate the results obtained here.
 ```
@@ -267,4 +284,3 @@ With special thanks to [R](http://www.R-project.org/) (R Core Team, 2015), [RStu
 * R Studio Team 2012. (2012).  RStudio version 0.98.953.  URL: https://www.rstudio.com/products/rstudio/ 
 * Wickham, H. and R. Francois. (2015). dplyr: A Grammar of Data Manipulation (v. 0.4.3).  URL: https://github.com/hadley/dplyr
 * Xie, Y., Vogt, A., Andrew, A., Zvoleff, A., Simon, A., Atkins, A., Manton, A., and 59 others. (2015).  knitr: A General-Purpose Package for Dynamic Report Generation in R (v. 1.11).  URL: http://yihui.name/knitr/  
-
